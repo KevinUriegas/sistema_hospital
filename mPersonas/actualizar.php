@@ -10,6 +10,7 @@ $telefono  = $_POST["telefono"];
 $correo    = $_POST["correo"];
 $tipo      = $_POST["tipo"];
 $sexo      = $_POST["sexo"];
+$fecha_nac = $_POST["fecha_nac"];
 $ide       = $_POST["ide"];
 
 $nombre    =trim($nombre);

@@ -161,7 +161,7 @@ $consulta=mysql_query("SELECT
                               extend: 'excel',
                               text: 'Exportar a Excel',
                               className: 'btn btn-login',
-                              title:'Bajas-Estaditicas',
+                              title:'Lista de Personas',
                               exportOptions: {
                                   columns: ':visible'
                               }

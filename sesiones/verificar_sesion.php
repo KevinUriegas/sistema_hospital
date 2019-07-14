@@ -3,9 +3,10 @@ include "../conexion/conexion.php";
 //iniciamos la sesi�n 
 session_name("loginUsuario"); 
 session_start(); 
+date_default_timezone_set('America/Monterrey');
 
 // $sMinSesion=$_SESSION["s_Sesion"];
-$sMinSesion=5;
+$sMinSesion=10;
 //**************************************************
 //se manda llamar el archivo de configuracion*******
 //include("../configuracion/configuracion.php");

@@ -1,11 +1,10 @@
 <?php 
-include('../sesiones/verificar_sesion.php');
-
-// Variables de configuración
-$titulo="Catálago de personas";
-$opcionMenu="A";
-$fecha=date("Y-m-d"); 
- ?>
+	include('../sesiones/verificar_sesion.php');
+	// Variables de configuración
+	$titulo="Catálago de Personas";
+	$opcionMenu="A";
+	$fecha=date("Y-m-d"); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,7 +118,7 @@ $fecha=date("Y-m-d");
 										<div class="form-group">
 											<label for="tipo">Tipo de persona:</label>
 											<select  id="tipo" class="select2 form-control " style="width: 100%">
-												<option value="estudiante">Estudiante</option>
+												<option value="estudiante">Paciente</option>
 												<option value="trabajador">Trabajador</option>
 											</select>
 										</div>
@@ -276,12 +275,15 @@ $fecha=date("Y-m-d");
 	
 	<!-- alertify -->
 	<script type="text/javascript" src="../plugins/alertifyjs/alertify.js"></script>
+	<script src="../plugins/input-mask/jquery.inputmask.js"></script>
+	<script src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
     <!-- Funciones propias -->
     <script src="funciones.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/precarga.js"></script>
-		<script src="../js/salir.js"></script>
+	<script src="../js/salir.js"></script>
 
     <!-- LLAMADAS A FUNCIONES E INICIALIZACION DE COMPONENTES -->
 
@@ -294,7 +296,7 @@ $fecha=date("Y-m-d");
      <script>
       $(function () {
         $(".select2").select2();
-        
+        $('#telefono').inputmask('(999)-999-99-99');
       });
     </script> 
 

@@ -17,7 +17,7 @@ function llenar_lista(){
 }
 
 function ver_alta(){
-    // preCarga(800,4);
+    $("#frmAlta")[0].reset();
     $("#lista").slideUp('low');
     $("#alta").slideDown('low');
     $("#nombre").focus();
@@ -45,28 +45,39 @@ $("#frmAlta").submit(function(e){
     var correo    = $("#correo").val();
     var tipo      = $("#tipo").val();
 
+    //Verifica si la cadena correo contiene un @ y .com
+    if(correo.includes('@') == true && correo.includes('.com') == true){
         $.ajax({
             url:"guardar.php",
             type:"POST",
             dateType:"html",
             data:{
-                    'nombre':nombre,
-                    'paterno':paterno,
-                    'materno':materno,
-                    'direccion':direccion,
-                    'sexo':sexo,
-                    'telefono':telefono,
-                    'fecha_nac':fecha_nac,
-                    'correo':correo,
-                    'tipo':tipo
-                 },
+                'nombre':nombre,
+                'paterno':paterno,
+                'materno':materno,
+                'direccion':direccion,
+                'sexo':sexo,
+                'telefono':telefono,
+                'fecha_nac':fecha_nac,
+                'correo':correo,
+                'tipo':tipo
+            },
             success:function(respuesta){
-              
-            alertify.set('notifier','position', 'bottom-right');
-            alertify.success('Se ha guardado el registro' );
-            $("#frmAlta")[0].reset();
-            $("#nombre").focus();
-            // llenarLista();
+                if(respuesta == "ok"){
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.success('Se ha guardado el registro' );
+                    $("#frmAlta")[0].reset();
+                    $("#nombre").focus();
+                    llenar_lista();
+                    ver_lista();
+                }else if (respuesta == "duplicado"){
+                    $("#nombre").focus();
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error('Registro Duplicado');
+                }else{
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error('Ha Ocurrido un Error');
+                }
             },
             error:function(xhr,status){
                 alert(xhr);
@@ -74,6 +85,13 @@ $("#frmAlta").submit(function(e){
         });
         e.preventDefault();
         return false;
+    }else{
+        alertify.set('notifier','position', 'bottom-right');
+        alertify.error('Verifica Correo');
+        return false;
+    }
+
+        
 });
 
 function abrirModalEditar(nombre,paterno,materno,direccion,telefono,fecha_nac,correo,tipo,sexo,ide){

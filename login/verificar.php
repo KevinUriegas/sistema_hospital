@@ -10,7 +10,7 @@ $contraMD5 = md5($contra);
     $consulta = mysql_query("SELECT
                                 usuarios.id_usuario,
                                 usuarios.usuario,
-                                usuarios.contra,
+                                usuarios.pass,
                                 personas.nombre,
                                 personas.ap_paterno,
                                 personas.ap_materno,
@@ -20,7 +20,7 @@ $contraMD5 = md5($contra);
                             FROM
                                 usuarios
                             INNER JOIN personas ON usuarios.id_persona = personas.id_persona
-                            WHERE usuario='$usuario' AND contra='$contraMD5'
+                            WHERE usuario='$usuario' AND pass='$contraMD5'
                             AND personas.activo=1 AND usuarios.activo=1",$conexion)or die(mysql_error());
 
     $row=mysql_fetch_row($consulta);
@@ -51,7 +51,10 @@ $contraMD5 = md5($contra);
     $_SESSION["ultimoAcceso"]= date("Y-n-j H:i:s"); 
 	
 	//Defino variables de session restantes
-    $_SESSION["nCompleto"]= $row[6]; //Nombre de completo de la persona
-    $_SESSION["idUsuario"]= $row[0]; //ID del usuario
-    $_SESSION["idPersona"]= $row[7]; //ID de persona
+    $_SESSION["nCompleto"]  = $row[6]; //Nombre de completo de la persona
+    $_SESSION["idUsuario"]  = $row[0]; //ID del usuario
+    $_SESSION["idPersona"]  = $row[7]; //ID de persona
+    $_SESSION["primeraVez"] = $row[8]; //Primera vez
+
+    $id_usuario =  $_SESSION["idUsuario"];
 ?> 

@@ -10,6 +10,25 @@ function cambioContra(){
     $("#vContra2").val('');
     $("#vContra1").focus();
 }
+function nombre(){
+    // console.log("Se ha llenado lista");
+   // preCarga(1000,4);
+   $.ajax({
+       url:"nombre.php",
+       type:"POST",
+       dateType:"html",
+       data:{},
+       success:function(respuesta){
+            hablar(respuesta);
+       },
+       error:function(xhr,status){
+           alert("no se muestra");
+       }
+   }); 
+}
+function hablar(texto){
+    responsiveVoice.speak(texto,"Spanish Female"); 
+}
 
 $("#frmIngreso").submit(function(e){
     var usuario,contra;
@@ -57,8 +76,7 @@ $("#frmIngreso").submit(function(e){
                             'message': 'Nombre de usuario o contraseña incorrectos' ,
                             'onok': function(){ 
                                 alertify.message('Gracias !');
-                                $("#username").val('');
-
+                                $('#frmIngreso')[0].reset();
                             }
                         }).show();   
                     break;
@@ -69,13 +87,15 @@ $("#frmIngreso").submit(function(e){
                             $("#usuario").val(usuario);                       
                         }else{
                             alertify.success('Ingresando....') ; 
+                            nombre();
                             preCarga(2000,2);
-                            setInterval(entrando, 2000);
+                            setInterval(entrando, 4000);
                     }
                     break;
                   case 2 :
                         cambioContra();
                         $("#usuario").val(usuario);
+
                     break;
               }
 
@@ -101,27 +121,21 @@ function evaluarCheck(valor){
    
 }
 
-function cancelar() {
-  // console.log("Saliendo del sistema...")
-  alertify
-    .confirm("alert")
-    .set({ transition: "zoom", message: "Transition effect: zoom" })
-    .show();
-  alertify
-    .confirm(
-      "Sistema de Registro de Alumnos",
-      "¿ Deseas cancelar el cambio de contraseña?",
-      function() {
-        $("#cuerpo").fadeIn();
-        $("#cambiarContra").hide("low");
-        $("#frmIngreso")[0].reset();
-        $("#frmCambiar")[0].reset();
-        $("#username").focus();
-      },
-      function() {
-        alertify.error("Cancelar");
-        console.log("cancelado");
-      }
-    )
-    .set("labels", { ok: "Si", cancel: "No" });
+function cancelar(){
+        // console.log("Saliendo del sistema...")
+        alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+        alertify.confirm(
+            'Sistema de Registro de Alumnos', 
+            '¿ Deseas cancelar el cambio de contraseña?', 
+            function(){ 
+                $("#cuerpo").fadeIn();
+                $("#cambiarContra").hide('low'); 
+                $("#frmIngreso")[0].reset();   
+                $("#frmCambiar")[0].reset();    
+                $("#username").focus();      
+                }, 
+            function(){ 
+                    alertify.error('Cancelar') ; 
+                    console.log('cancelado')}
+        ).set('labels',{ok:'Si',cancel:'No'});
 }

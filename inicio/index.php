@@ -48,6 +48,22 @@
 
 					</section>
 				</div>
+				<!-- <div>
+					<label for="">Municipios</label>(<label id="n_m"></label>)
+					<select name="" id="municipios" class="form-control" onchange="verificar()">
+						<option value="" selected="true">Selecciona...</option>
+						<option value="1">Linares</option>
+					</select>
+
+					<label for="">Colonias</label>(<label id="n_c"></label>)
+					<select name="" id="colonias" class="form-control" onchange="verificar()">
+						<option value="" selected="true">Selecciona...</option>
+						<option value="1">Camachito</option>
+					</select>
+
+					<label for="">Total de Personas</label>(<label id="n_p"></label>)
+					<input name="" id="personas" class="form-control" value="100">
+				</div> -->
 			</div>			
 		</div>
 	</div>
@@ -77,7 +93,22 @@
     <script src="../plugins/bootstrap-fileinput-master/js/locales/es.js" type="text/javascript"></script>
     <script src="../plugins/bootstrap-fileinput-master/themes/fas/theme.js" type="text/javascript"></script>
 	<script src="../plugins/bootstrap-fileinput-master/themes/explorer-fas/theme.js" type="text/javascript"></script>
-	
+	<!-- <script>
+		function verificar(){
+			var municipios = $('#municipios').val();
+			var colonias   = $('#colonias').val();
+
+			if(municipios == "" && colonias == ""){
+				$('#personas').val("100");
+			}else if(municipios != "" && colonias == "" ){
+				$('#personas').val("50");
+			}else if(municipios != "" && colonias != "" ){
+				$('#personas').val("25");
+			}else if (colonias != "" && municipios == ""){
+				$('#personas').val("12");
+			}
+		}
+	</script> -->
 	<script>
 		window.onload = function() {
 			$("#cuerpo").fadeIn("slow");

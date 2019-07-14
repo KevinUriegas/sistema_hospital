@@ -40,7 +40,30 @@
 								</p>
 							</div>
 						</div>
-
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fab fa-modx"></i>
+								<p>
+									<a href="#">Areas</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fab fa-modx"></i>
+								<p>
+									<a href="#">Doctores</a>
+								</p>
+							</div>
+						</div> 
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fab fa-modx"></i>
+								<p>
+									<a href="#">Trabajadores</a>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>				
 			</div>
@@ -51,21 +74,40 @@
 				<div class="panel-heading" role="tab" id="heading1">
 					<h4 class="panel-title">
 						<a href="#collapse2" data-toggle="collapse" data-parent="#accordion">
-							Categoria de modulo.
+							Consultas.
 						</a>				
 					</h4>
 				</div>
-
 				<div id="collapse2" class="panel-collapse collapse ">
+					<div class="panel-body">						 
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fab fa-modx"></i>
+								<p>
+									<a href="#">Pacientes</a>
+								</p>
+							</div>
+						</div> 
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fab fa-modx"></i>
+								<p>
+									<a href="#">Agenda</a>
+								</p>
+							</div>
+						</div> 
+					</div>
+				</div>
+				<div id="collapse3" class="panel-collapse collapse ">
 					<div class="panel-body">
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
 								<i class="fab fa-modx"></i>
 								<p>
-									<a href="../mUsuarios/index.php">Aqui va el nombre del modulo</a>
+									<a href="#">Citas</a>
 								</p>
 							</div>
-						</div> 
+						</div>
 					</div>
 				</div>				
 			</div>
