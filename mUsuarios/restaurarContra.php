@@ -11,8 +11,9 @@ $contraMD5=md5('12345');
 
 mysql_query("SET NAMES utf8");
  $insertar = mysql_query("UPDATE usuarios SET
-							contra='$contraMD5',
+							pass='$contraMD5',
 							fecha_registro='$fecha',
+							pvez='1',
 							hora_registro='$hora',
 							id_registro='1'
 						WHERE id_usuario='$idUser'

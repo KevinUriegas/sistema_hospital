@@ -10,7 +10,7 @@ $opcionMenu="A";
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Plantilla</title>
+	<title>Sistema Hospital</title>
 
 	<!-- Meta para compatibilidad en dispositivos mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -78,13 +78,13 @@ $opcionMenu="A";
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
 											<label for="contra">Contraseña:</label>
-											<input type="password" id="contra" class="form-control " required="" placeholder="Escribe la contraseña">
+											<input type="password" id="contra" class="form-control " required="" placeholder="Escribe la contraseña" onkeyup="verificar_pass()">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
 											<label for="vContra">Verificar contraseña:</label>
-											<input type="password" id="vContra" class="form-control " required="" placeholder="Vuelva a escribir la contraseña">
+											<input type="password" id="vContra" class="form-control " required="" placeholder="Vuelva a escribir la " onkeyup="verificar_pass()">
 										</div>
 									</div>
 
@@ -93,7 +93,7 @@ $opcionMenu="A";
 								<div class="row">
 									<div class="col-lg-12">
 										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Usuarios</button>
-										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información">										
+										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar" disabled>										
 									</div>
 								</div>
             				</form>

@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Plantilla</title>
+	<title>Sistema Hospital</title>
 
 	<!-- Meta para compatibilidad en dispositivos mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -219,7 +219,7 @@
 						<div class="form-group">
 							<label for="tipoE">Tipo de persona:</label>
 							<select  id="tipoE" class="select2 form-control " style="width: 100%">
-								<option value="estudiante">Estudiante</option>
+								<option value="paciente">Paciente</option>
 								<option value="trabajador">Trabajador</option>
 							</select>
 						</div>
@@ -297,6 +297,7 @@
       $(function () {
         $(".select2").select2();
         $('#telefono').inputmask('(999)-999-99-99');
+        $('#telefonoE').inputmask('(999)-999-99-99');
       });
     </script> 
 

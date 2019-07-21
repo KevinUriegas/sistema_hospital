@@ -15,7 +15,7 @@ $consulta=mysql_query("SELECT
 												(SELECT personas.ap_paterno FROM personas WHERE personas.id_persona=usuarios.id_persona) AS pUsuario,
 												(SELECT personas.ap_materno FROM personas WHERE personas.id_persona=usuarios.id_persona) AS mUsuario,
 												fecha_registro,
-												contra
+												pass
 												FROM
 												usuarios",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
@@ -140,11 +140,6 @@ $consulta=mysql_query("SELECT
                       // visible: false
                   }],
                   buttons: [
-                            {
-                                extend: 'pageLength',
-                                text: 'Registros',
-                                className: 'btn btn-login'
-                            },
                           {
                               extend: 'excel',
                               text: 'Exportar a Excel',

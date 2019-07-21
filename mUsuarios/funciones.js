@@ -1,3 +1,17 @@
+function verificar_pass(){
+  var pass1 = $('#contra').val();
+  var pass2 = $('#vContra').val();
+
+  if(pass1.trim() != "" && pass2.trim() !=""){
+    if(pass1 == pass2){
+      $('#guardar').removeAttr('disabled');
+    }else{
+      $('#guardar').attr('disabled', 'disabled');
+    }
+  }else{
+    $('#guardar').attr('disabled', 'disabled');
+  }
+}
 function llenar_lista(){
      // console.log("Se ha llenado lista");
     // preCarga(1000,4);
@@ -18,6 +32,7 @@ function llenar_lista(){
 
 function ver_alta(){
     // preCarga(800,4);
+    $("#frmAlta")[0].reset();
     $("#lista").slideUp('low');
     $("#alta").slideDown('low');
     $("#nombre").focus();
@@ -84,8 +99,6 @@ $("#frmAlta").submit(function(e){
         $("#contra").focus();
         return false;       
     }
-  
-
         $.ajax({
             url:"guardar.php",
             type:"POST",
@@ -99,8 +112,8 @@ $("#frmAlta").submit(function(e){
               
             alertify.set('notifier','position', 'bottom-right');
             alertify.success('Se ha guardado el registro' );
-            $("#frmAlta")[0].reset();
-            llenar_persona();
+            llenar_lista();
+            ver_lista();
             },
             error:function(xhr,status){
                 alert(xhr);
@@ -262,31 +275,46 @@ function llenar_persona()
 }
 
 function restaurarContra(idUser){
+    alert(idUser);
     // console.log(idUser);
-    $.ajax({
-        url:"restaurarContra.php",
-        type:"POST",
-        dateType:"html",
-        data:{
-                'idUser':idUser
-             },
-        success:function(respuesta){
+    var titular = "Restablecer Contraseña";
+    var mensaje = "¿Deseas Restaurar la contraseña?";
 
-            alertify.dialog('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+    alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+    alertify.confirm(
+        titular, 
+        mensaje, 
+        function(){ 
+            $.ajax({
+                url:"restaurarContra.php",
+                type:"POST",
+                dateType:"html",
+                data:{
+                        'idUser':idUser
+                     },
+                success:function(respuesta){
 
-            alertify.alert()
-            .setting({
-                'title':'Información',
-                'label':'Salir',
-                'message': 'La contraseña ha sido modificada' ,
-                'onok': function(){ alertify.message('Gracias !');}
-            }).show();
+                    alertify.dialog('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
 
-        },
-        error:function(xhr,status){
-            alert(xhr);
-        },
-    });
+                    alertify.alert()
+                    .setting({
+                        'title':'Información',
+                        'label':'Salir',
+                        'message': 'La contraseña ha sido modificada' ,
+                        'onok': function(){ alertify.message('Gracias !');}
+                    }).show();
+
+                },
+                error:function(xhr,status){
+                    alert(xhr);
+                },
+            });
+            }, 
+        function(){ 
+                alertify.error('Cancelar') ; 
+                // console.log('cancelado')
+              }
+    ).set('labels',{ok:'Restaurar',cancel:'Cancelar'}); 
 }
 
 function mostrarContra(){

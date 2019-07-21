@@ -32,7 +32,7 @@ $verificar = mysql_query("SELECT id_persona FROM personas
 
 //Verifica si el registro Existe
 $existe = mysql_num_rows($verificar);
-if($verificar == 0){
+if($existe == 0){
 				
 	$insertar = mysql_query("INSERT INTO personas 
 		(
