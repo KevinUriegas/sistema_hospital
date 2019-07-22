@@ -123,7 +123,7 @@ $("#frmAlta").submit(function(e){
         return false;
 });
 
-function abrirModalEditar(idUsuario,idPersona,usuario,contra,){
+function abrirModalEditar(idUsuario,idPersona,usuario){
    
     $("#frmActuliza")[0].reset();
 
@@ -132,8 +132,6 @@ function abrirModalEditar(idUsuario,idPersona,usuario,contra,){
     $("#idE").val(idUsuario);
     
     $("#usuarioE").val(usuario);
-    $("#contraE").val(contra);
-    $("#vContraE").val(contra);
 
     $("#modalEditar").modal("show");
 
@@ -145,8 +143,6 @@ function abrirModalEditar(idUsuario,idPersona,usuario,contra,){
 $("#frmActuliza").submit(function(e){
   
     var usuario = $("#usuarioE").val();
-    var contra  = $("#contraE").val();
-    var vContra  = $("#vContraE").val();
 
        // validacion para que el nombre de usuario sea minimo de 5 caracteres
        caracteres=$("#usuarioE").val().length;
@@ -163,21 +159,6 @@ $("#frmActuliza").submit(function(e){
            $("#usuarioE").focus();
            return false;       
        }
-   
-       // validacion para que las contraseñas coincidan
-       if(contra != vContra){
-           alertify.dialog('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
-   
-           alertify.alert()
-           .setting({
-               'title':'Información',
-               'label':'Salir',
-               'message': 'Las contraseñas deben de ser iguales.' ,
-               'onok': function(){ alertify.message('Gracias !');}
-           }).show();
-           $("#contra").focus();
-           return false;       
-       }
     var ide     = $("#idE").val();
 
         $.ajax({
@@ -186,7 +167,6 @@ $("#frmActuliza").submit(function(e){
             dateType:"html",
             data:{
                     'usuario':usuario,
-                    'contra':contra,
                     'ide':ide
                  },
             success:function(respuesta){
@@ -356,3 +336,23 @@ function llenar_personaU(idPersona)
         },
     });
 }
+
+function imprimir(){
+
+    var titular = "Lista de Usuarios";
+    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de usuarios activos";
+    var link    = "pdfListaUsuarios.php?";
+
+    alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+    alertify.confirm(
+        titular, 
+        mensaje, 
+        function(){ 
+            window.open(link,'_blank');
+            }, 
+        function(){ 
+                alertify.error('Cancelar') ; 
+                // console.log('cancelado')
+              }
+    ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
+  }

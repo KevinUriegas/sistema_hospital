@@ -8,18 +8,7 @@ $id_usuario =  $_SESSION["idUsuario"];
 mysql_query("SET NAMES utf8");
 
 // Consulta a la base de datos
-$consulta=mysql_query("SELECT
-												id_usuario,
-												id_persona,
-												usuario,
-												activo,
-												(SELECT personas.nombre FROM personas WHERE personas.id_persona=usuarios.id_persona) AS nUsuario,
-												(SELECT personas.ap_paterno FROM personas WHERE personas.id_persona=usuarios.id_persona) AS pUsuario,
-												(SELECT personas.ap_materno FROM personas WHERE personas.id_persona=usuarios.id_persona) AS mUsuario,
-												fecha_registro,
-												pass
-												FROM
-												usuarios",$conexion) or die (mysql_error());
+$consulta=mysql_query("SELECT id_area,nombre,activo FROM areas WHERE activo = '1'",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
  ?>
 				            <div class="table-responsive">
@@ -28,32 +17,24 @@ $consulta=mysql_query("SELECT
 				                    <thead align="center">
 				                      <tr class="info" >
 				                        <th>#</th>
-				                        <th>Nombre</th>
-				                        <th>Usuario</th>
-				                        <th>Registro</th>
-																<th>Restaurar</th>
+				                        <th>Nombre Area</th>
 				                        <th>Editar</th>
-																<th>Estatus</th>
+										<th>Estatus</th>
 				                      </tr>
 				                    </thead>
 
 				                    <tbody align="center">
 				                    <?php 
-				                    $n=1;
-				                    while ($row=mysql_fetch_row($consulta)) {
-										$idUsuario          = $row[0];
-										$activo             = $row[3];
-										$nomUsuarioCompleto = $row[5].' '.$row[6].' '.$row[4];
-										$idPersona          = $row[1];
-										$usuario            = $row[2];
-										$registro           = $row[7];
-										$contra             = $row[8];
+										$n=1;
+										while ($row=mysql_fetch_row($consulta)) {
+											$idArea      = $row[0];
+											$nombre_area = $row[1];
+											$activo      = $row[2];
 
-										$checado         = ($activo == 1)?'checked' : '';		
-										$desabilitar     = ($activo == 0)?'disabled': '';
-										$claseDesabilita = ($activo == 0)?'desabilita':'';
-										$deshabilitar_boton = ($id_usuario == $idUsuario)?"disabled = 'disabled'":"";
-															?>
+											$checado         = ($activo == 1)?'checked' : '';		
+											$desabilitar     = ($activo == 0)?'disabled': '';
+											$claseDesabilita = ($activo == 0)?'desabilita':'';
+									?>
 				                      <tr>
 				                        <td >
 				                          <p id="<?php echo "tConsecutivo".$n; ?>" class="<?php echo $claseDesabilita; ?>">
@@ -62,44 +43,24 @@ $consulta=mysql_query("SELECT
 				                        </td>
 				                        <td>
 																<p id="<?php echo "tNcompleto".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $nomUsuarioCompleto; ?>
-				                          </p>
-				                        </td>
-				                        <td>
-																<p id="<?php echo "tUsuario".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $usuario; ?>
-				                          </p>
-				                        </td>
-				                        <td>
-																<p id="<?php echo "tRegistro".$n; ?>"  class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $registro; ?>
+				                          	<?php echo $nombre_area; ?>
 				                          </p>
 				                        </td>	
 				                        <td>
-				                          <button id="<?php echo "botonR".$n; ?>" <?php echo $desabilitar ?>  type="button" class="btn btn-login btn-sm" 
-				                          onclick="restaurarContra(
-				                          							'<?php echo $idUsuario ?>'
-				                          							);">
-				                          	<i class="fas fa-sync-alt"></i>
-				                          </button>
-				                        </td>
-				                        <td>
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
-				                          							'<?php echo $idUsuario  ?>',
-				                          							'<?php echo $idPersona ?>',
-				                          							'<?php echo $usuario ?>'
+				                          							'<?php echo $idArea  ?>',
+				                          							'<?php echo $nombre_area ?>'
 				                          							);">
 				                          	<i class="far fa-edit"></i>
 				                          </button>
 				                        </td>
 				                        <td>
-											<input <?php echo $deshabilitar_boton;?> data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idUsuario; ?>);">
+											<input data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idArea; ?>);">
 				                        </td>
 				                      </tr>
 				                      <?php
 									  $n++;
-									  $deshabilitar_boton = "";
 				                    }
 				                     ?>
 
@@ -107,13 +68,10 @@ $consulta=mysql_query("SELECT
 
 				                    <tfoot align="center">
 				                      <tr class="info">
-															<th>#</th>
-				                        <th>Nombre</th>
-				                        <th>Usuario</th>
-				                        <th>Registro</th>
-																<th>Restaurar</th>
+										<th>#</th>
+				                        <th>Nombre Area</th>
 				                        <th>Editar</th>
-																<th>Estatus</th>
+										<th>Estatus</th>
 				                      </tr>
 				                    </tfoot>
 				                </table>
@@ -153,11 +111,10 @@ $consulta=mysql_query("SELECT
                               }
                           },
                          {
-							  text: 'Nuevo Usuario',
+							  text: 'Nueva Area',
 							  className: 'btn btn-login',
                               action: function (  ) {
 								ver_alta();
-								llenar_persona();
                               },
                               counter: 1
                           },

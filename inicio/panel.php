@@ -44,13 +44,13 @@
 							<div class="caja">
 								<i class="fab fa-modx"></i>
 								<p>
-									<a href="#">Areas</a>
+									<a href="../aAreas/index.php">Areas</a>
 								</p>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
-								<i class="fab fa-modx"></i>
+								<i class="fas fa-user-md"></i>
 								<p>
 									<a href="#">Doctores</a>
 								</p>
@@ -58,9 +58,9 @@
 						</div> 
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
-								<i class="fab fa-modx"></i>
+								<i class="fas fa-stethoscope"></i>
 								<p>
-									<a href="#">Trabajadores</a>
+									<a href="../aEspecialidades/index.php">Especialidades</a>
 								</p>
 							</div>
 						</div>
@@ -82,7 +82,7 @@
 					<div class="panel-body">						 
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
-								<i class="fab fa-modx"></i>
+								<i class="fas fa-user-injured"></i>
 								<p>
 									<a href="#">Pacientes</a>
 								</p>
@@ -90,7 +90,7 @@
 						</div> 
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
-								<i class="fab fa-modx"></i>
+								<i class="fas fa-calendar-alt"></i>
 								<p>
 									<a href="#">Agenda</a>
 								</p>

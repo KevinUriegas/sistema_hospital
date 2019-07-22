@@ -2,7 +2,7 @@
 include('../sesiones/verificar_sesion.php');
 
 // Variables de configuración
-$titulo="Catálago de Usuarios";
+$titulo="Catálago de Especialidades";
 $opcionMenu="A";
 
  ?>
@@ -62,38 +62,18 @@ $opcionMenu="A";
 				        <section id="alta" style="display: none">
             				<form id="frmAlta">
 								<div class="row">
-									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
 										<div class="form-group">
-											<label for="idPersona">Seleccione a la persona:</label>
-											<select  id="idPersona" class="select2 form-control " style="width: 100%">
-											</select>
+											<label for="idPersona">Nombre de Especialidad:</label>
+											<input type="text" id="nombre_especialidad" class="form-control" placeholder="Nombre de Especialidad" required>
 										</div>
 									</div>
-									<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
-										<div class="form-group">
-											<label for="usuario">Usuario:</label>
-											<input type="text" id="usuario" class="form-control " required="" placeholder="Escribe el usuario">
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-										<div class="form-group">
-											<label for="contra">Contraseña:</label>
-											<input type="password" id="contra" class="form-control " required="" placeholder="Escribe la contraseña" onkeyup="verificar_pass()">
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-										<div class="form-group">
-											<label for="vContra">Verificar contraseña:</label>
-											<input type="password" id="vContra" class="form-control " required="" placeholder="Vuelva a escribir la " onkeyup="verificar_pass()">
-										</div>
-									</div>
-
 									<hr class="linea">
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Usuarios</button>
-										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar" disabled>										
+										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Especialidades</button>
+										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar">										
 									</div>
 								</div>
             				</form>
@@ -124,22 +104,15 @@ $opcionMenu="A";
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Editar Datos Usuarios</h4>
+	        <h4 class="modal-title">Editar Datos Especialidades</h4>
 	      </div>
 	      <div class="modal-body">
 				<input type="hidden" id="idE">
 				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
 						<div class="form-group">
-							<label for="nombreE">Nombre de la Persona:</label>
-							<select  id="nombreE" class="select2 form-control " style="width: 100%" disabled>
-							</select>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
-						<div class="form-group">
-							<label for="usuarioE">Usuario:</label>
-							<input type="text" id="usuarioE" class="form-control " required="" placeholder="Escribe el nombre de usuario">
+							<label for="idPersona">Nombre de Especialidad:</label>
+							<input type="text" id="nombre_especialidadE" class="form-control" required>
 						</div>
 					</div>
 					<hr class="linea">

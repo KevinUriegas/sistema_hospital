@@ -1,6 +1,8 @@
 <?php 
 // Conexion a la base de datos
-include'../conexion/conexion.php';
+include('../sesiones/verificar_sesion.php');
+
+$id_persona =  $_SESSION["idPersona"];
 
 // Codificacion de lenguaje
 mysql_query("SET NAMES utf8");
@@ -59,6 +61,7 @@ $consulta=mysql_query("SELECT
 										$checado=($activo==1)?'checked':'';		
 										$desabilitar=($activo==0)?'disabled':'';
 										$claseDesabilita=($activo==0)?'desabilita':'';
+										$deshabilitar_boton = ($id_persona == $idPersona)?"disabled = 'disabled'":"";
 															?>
 				                      <tr>
 				                        <td >
@@ -104,11 +107,12 @@ $consulta=mysql_query("SELECT
 				                          </button>
 				                        </td>
 				                        <td>
-											<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idPersona; ?>);">
+											<input <?php echo $deshabilitar_boton;?> data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idPersona; ?>);">
 				                        </td>
 				                      </tr>
 				                      <?php
-				                      $n++;
+									  $n++;
+									  $deshabilitar_boton = "";
 				                    }
 				                     ?>
 
