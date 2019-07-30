@@ -74,7 +74,7 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Personas</button>
+										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Tipos Trabajador</button>
 										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información">										
 									</div>
 								</div>

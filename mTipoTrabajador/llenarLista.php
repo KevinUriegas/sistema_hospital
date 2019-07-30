@@ -113,13 +113,13 @@ $consulta=mysql_query("SELECT
                               extend: 'excel',
                               text: 'Exportar a Excel',
                               className: 'btn btn-login',
-                              title:'Lista de Sedes',
+                              title:'Lista de Tipos Trabajador',
                               exportOptions: {
                                   columns: ':visible'
                               }
                           },
                          {
-                              text: 'Nueva Sede',
+                              text: 'Nuevo Tipo',
                               action: function (  ) {
                                       ver_alta();
                               },

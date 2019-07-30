@@ -161,9 +161,9 @@ function status(concecutivo,id){
 function imprimir(){
 
     var titular = "Lista de Tipo Trabajador";
-    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de sedes activas";
+    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de tipo de trabajadores activos";
     // var link    = "pdfListaPersona.php?id="+idPersona+"&datos="+datos;
-    var link    = "pdfListaPersona.php?";
+    var link    = "pdfListaTipoT.php?";
 
     alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
     alertify.confirm(
