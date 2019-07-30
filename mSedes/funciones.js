@@ -177,7 +177,7 @@ function imprimir(){
     var titular = "Lista de sedes";
     var mensaje = "¿Deseas generar un archivo con PDF oon la lista de sedes activas";
     // var link    = "pdfListaPersona.php?id="+idPersona+"&datos="+datos;
-    var link    = "pdfListaPersona.php?";
+    var link    = "pdfListaSedes.php?";
 
     alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
     alertify.confirm(

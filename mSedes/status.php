@@ -1,7 +1,8 @@
 <?php
 //se manda llamar la conexion
-include("../conexion/conexion.php");
+include('../sesiones/verificar_sesion.php');
 
+$id_usuario =  $_SESSION["idUsuario"];
 $valor = $_POST["valor"];
 $id    = $_POST["id"];
 
@@ -15,7 +16,7 @@ mysql_query("SET NAMES utf8");
 							activo='$valor',
 							fecha_registro='$fecha',
 							hora_registro='$hora',
-							id_registro='1'
+							id_registro='$id_usuario'
 						WHERE id_sede='$id'
 							 ",$conexion)or die(mysql_error());
 
