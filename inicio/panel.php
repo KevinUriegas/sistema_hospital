@@ -84,7 +84,7 @@
 							<div class="caja">
 								<i class="fas fa-user-injured"></i>
 								<p>
-									<a href="#">Pacientes</a>
+									<a href="../aPacientes/index.php">Pacientes</a>
 								</p>
 							</div>
 						</div> 

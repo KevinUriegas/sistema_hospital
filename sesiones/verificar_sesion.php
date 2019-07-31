@@ -6,7 +6,7 @@ session_start();
 date_default_timezone_set('America/Monterrey');
 
 // $sMinSesion=$_SESSION["s_Sesion"];
-$sMinSesion=10;
+$sMinSesion=30;
 //**************************************************
 //se manda llamar el archivo de configuracion*******
 //include("../configuracion/configuracion.php");
