@@ -2,7 +2,7 @@
 include('../sesiones/verificar_sesion.php');
 
 // Variables de configuración
-$titulo="Catálago de Consultorios";
+$titulo="Catálago de Doctores";
 $opcionMenu="A";
 
  ?>
@@ -62,25 +62,35 @@ $opcionMenu="A";
 				        <section id="alta" style="display: none">
             				<form id="frmAlta">
 								<div class="row">
-									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 										<div class="form-group">
-											<label for="idArea">Seleccione el Area:</label>
-											<select  id="idArea" class="select2 form-control " style="width: 100%">
-											</select>
+											<label for="idPersona">*Nombre Persona:</label>
+											<select id="nombre_persona" name="nombre_persona" class="form-control"></select>
 										</div>
 									</div>
-									<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 										<div class="form-group">
-											<label for="Area">Nombre:</label>
-											<input type="text" id="nombre" class="form-control " required="" placeholder="Nombre de Consultorio">
+											<label for="idPersona">*Especialidad:</label>
+											<select id="nombre_especialidad" name="nombre_especialidad" class="form-control"></select>
 										</div>
 									</div>
-
+									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+										<div class="form-group">
+											<label for="idPersona">*Consultorio:</label>
+											<select id="nombre_consultorio" name="nombre_consultorio" class="form-control"></select>
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+										<div class="form-group">
+											<label for="idPersona">*Cedula:</label>
+											<input type="file" name="cedula" id="cedula">
+										</div>
+									</div>
 									<hr class="linea">
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Consultorios</button>
+										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Doctores</button>
 										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar">										
 									</div>
 								</div>
@@ -112,22 +122,33 @@ $opcionMenu="A";
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Editar Datos Consultorios</h4>
+	        <h4 class="modal-title">Editar Datos Doctor</h4>
 	      </div>
 	      <div class="modal-body">
-				<input type="hidden" id="idE">
+				<input type="hidden" id="idE" name="idE">
 				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
 						<div class="form-group">
-							<label for="areaE">Nombre del Area:</label>
-							<select  id="areaE" class="select2 form-control " style="width: 100%">
-							</select>
+							<label for="idPersona">*Nombre Persona:</label>
+							<select id="nombre_personaE" name="nombre_personaE" class="form-control select2" disabled style="width: 100%"></select>
 						</div>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-3">
 						<div class="form-group">
-							<label for="nombreE">Nombre:</label>
-							<input type="text" id="nombreE" class="form-control " required="" placeholder="Escribe el nombre de usuario">
+							<label for="idPersona">*Especialidad:</label>
+							<select id="nombre_especialidadE" name="nombre_especialidadE" class="form-control select2" style="width: 100%"></select>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-3">
+						<div class="form-group">
+							<label for="idPersona">*Consultorio:</label>
+							<select id="nombre_consultorioE" name="nombre_consultorioE" class="form-control select2" style="width: 100%"></select>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<div class="form-group">
+							<label for="idPersona">*Cedula:</label>
+							<input type="file" name="cedulaE" id="cedulaE">
 						</div>
 					</div>
 					<hr class="linea">

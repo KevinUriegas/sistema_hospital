@@ -8,14 +8,18 @@ include'../funcionesPHP/calcularEdad.php';
 // $idDatos=$_GET['datos'];
         
 mysql_query("SET NAMES utf8");
-$consulta=mysql_query("SELECT
-                        CONCAT(nombre,' ',ap_paterno,' ',ap_materno) AS Nombre,
-                        IF(sexo='M','Masculino','Femenino') AS Genero,
-                        correo,
-                        IF(tipo_persona='trabajador','Trabajador','Estudiante') AS tipo,
-                        fecha_nacimiento
-                        FROM
-                        personas WHERE activo=1",$conexion) or die (mysql_error());
+$consulta=mysql_query("SELECT (SELECT CONCAT( personas.nombre, ' ', personas.ap_paterno, ' ', personas.ap_materno ) FROM personas WHERE personas.id_persona = pacientes.id_persona) AS Nomb,
+                    numero_seguro,
+                    CASE tipo_sangre 
+                        WHEN '1' THEN
+                        'A+' 
+                        WHEN '2' THEN
+                        'A-' ELSE 'B+' 
+                    END AS tipo_sangre,
+                    estatura,
+                    peso
+                FROM pacientes
+                WHERE activo = '1'",$conexion) or die (mysql_error());
    
 //Descargamos el arreglo que arroja la consulta
 $n=1;
@@ -122,7 +126,7 @@ $fechaEspanol=fechaCastellano($fecha);
     </tr>
     <tr >
         <td  colspan="10" class="encabezado">
-            LISTA DE PERSONAS
+            LISTA DE PACIENTES
         </td>
     </tr> 
     <tr >
@@ -130,27 +134,31 @@ $fechaEspanol=fechaCastellano($fecha);
             #
         </td>
         <td  colspan="3" class="titular">
-            Nombre
-        </td>
-        <td  colspan="1" class="titular">
-            Edad
-        </td>
-        <td  colspan="3" class="titular">
-            Correo
+            Nombre Paciente
         </td>
         <td  colspan="2" class="titular">
-            Tipo
+            Numero Seguro
+        </td>
+        <td  colspan="1" class="titular">
+            Tipo Sangre
+        </td>
+        <td  colspan="2" class="titular">
+            Estatura
+        </td>
+        <td  colspan="1" class="titular">
+            Peso
         </td>
     </tr>
 
     <?php
         $n=1;
         while($row=mysql_fetch_row($consulta)){
-            $nombre  = $row[0];
-            $genero  = $row[1];
-            $correo = $row[2];
-            $tipo    = $row[3];
-            $edad    = CalculaEdad($row[4]); 
+            $nombre        = $row[0];
+            $numero_seguro = $row[1];
+            $sangre        = $row[2];
+            $estatura      = $row[3];
+            $peso          = $row[4];
+
     ?>
         <tr >
             <td  colspan="1" class="borde">
@@ -163,19 +171,24 @@ $fechaEspanol=fechaCastellano($fecha);
                     <?php echo $nombre; ?>
                 </p>
             </td>
-            <td  colspan="1" class="borde">
+            <td  colspan="2" class="borde">
                 <p class="parrafo">
-                    <?php echo $edad; ?>
+                    <?php echo $numero_seguro; ?>
                 </p>
             </td>
-            <td  colspan="3" class="borde">
+            <td  colspan="1" class="borde">
                 <p class="parrafo">
-                    <?php echo $correo; ?>
+                    <?php echo $sangre; ?>
                 </p>
             </td>
             <td  colspan="2" class="borde">
                 <p class="parrafo">
-                    <?php echo $tipo; ?>
+                    <?php echo $estatura; ?>
+                </p>
+            </td>
+            <td  colspan="1" class="borde">
+                <p class="parrafo">
+                    <?php echo $peso; ?>
                 </p>
             </td>
         </tr>

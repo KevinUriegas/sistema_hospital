@@ -8,7 +8,31 @@ $id_usuario =  $_SESSION["idUsuario"];
 mysql_query("SET NAMES utf8");
 
 // Consulta a la base de datos
-$consulta=mysql_query("SELECT id_especialidad,nombre,activo FROM especialidades WHERE activo = '1'",$conexion) or die (mysql_error());
+$consulta=mysql_query("SELECT
+	id_paciente,
+	id_persona,
+	(
+	SELECT
+		CONCAT( personas.nombre, ' ', personas.ap_paterno, ' ', personas.ap_materno ) 
+	FROM
+		personas 
+	WHERE
+		personas.id_persona = pacientes.id_persona 
+	) AS Nomb,
+	numero_seguro,
+CASE
+		tipo_sangre 
+		WHEN '1' THEN
+		'A+' 
+		WHEN '2' THEN
+		'A-' ELSE 'B+' 
+	END AS tipo_sangre,
+	tipo_sangre,
+	estatura,
+	peso,
+	activo 
+FROM
+	pacientes",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
  ?>
 				            <div class="table-responsive">
@@ -17,7 +41,11 @@ $consulta=mysql_query("SELECT id_especialidad,nombre,activo FROM especialidades 
 				                    <thead align="center">
 				                      <tr class="info" >
 				                        <th>#</th>
-				                        <th>Nombre Especialidad</th>
+				                        <th>Nombre Paciente</th>
+				                        <th>Numero Seguro</th>
+				                        <th>Tipo Sangre</th>
+				                        <th>Estatura</th>
+				                        <th>Peso</th>
 				                        <th>Editar</th>
 										<th>Estatus</th>
 				                      </tr>
@@ -27,9 +55,15 @@ $consulta=mysql_query("SELECT id_especialidad,nombre,activo FROM especialidades 
 				                    <?php 
 										$n=1;
 										while ($row=mysql_fetch_row($consulta)) {
-											$idEspecialidad      = $row[0];
-											$nombre_especialidad = $row[1];
-											$activo              = $row[2];
+											$idPaciente    = $row[0];
+											$idPersona     = $row[1];
+											$nombre        = $row[2];
+											$numero_seguro = $row[3];
+											$tipo_sangre   = $row[4];
+											$tipo_sangre1  = $row[5];
+											$estatura      = $row[6];
+											$peso          = $row[7];
+											$activo        = $row[8];
 
 											$checado         = ($activo == 1)?'checked' : '';		
 											$desabilitar     = ($activo == 0)?'disabled': '';
@@ -42,21 +76,45 @@ $consulta=mysql_query("SELECT id_especialidad,nombre,activo FROM especialidades 
 				                          </p>
 				                        </td>
 				                        <td>
-																<p id="<?php echo "tNcompleto".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $nombre_especialidad; ?>
+											<p id="<?php echo "tNcompleto".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $nombre; ?>
+				                          </p>
+				                        </td>
+				                        <td>
+											<p id="<?php echo "tseguro".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $numero_seguro; ?>
+				                          </p>
+				                        </td>
+				                        <td>
+											<p id="<?php echo "tsangre".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $tipo_sangre; ?>
+				                          </p>
+				                        </td>
+				                        <td>
+											<p id="<?php echo "testatura".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $estatura; ?>
+				                          </p>
+				                        </td>
+				                        <td>
+											<p id="<?php echo "tpeso".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $peso; ?>
 				                          </p>
 				                        </td>	
 				                        <td>
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
-				                          							'<?php echo $idEspecialidad  ?>',
-				                          							'<?php echo $nombre_especialidad ?>'
-				                          							);">
+				                          	'<?php echo $idPaciente  ?>',
+				                          	'<?php echo $idPersona ?>',
+				                          	'<?php echo $numero_seguro ?>',
+				                          	'<?php echo $tipo_sangre1 ?>',
+				                          	'<?php echo $estatura ?>',
+				                          	'<?php echo $peso ?>'
+				                          	);">
 				                          	<i class="far fa-edit"></i>
 				                          </button>
 				                        </td>
 				                        <td>
-											<input data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idEspecialidad; ?>);">
+											<input data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idPaciente; ?>);">
 				                        </td>
 				                      </tr>
 				                      <?php
@@ -69,7 +127,11 @@ $consulta=mysql_query("SELECT id_especialidad,nombre,activo FROM especialidades 
 				                    <tfoot align="center">
 				                      <tr class="info">
 										<th>#</th>
-				                        <th>Nombre Especialidad</th>
+				                        <th>Nombre Paciente</th>
+				                        <th>Numero Seguro</th>
+				                        <th>Tipo Sangre</th>
+				                        <th>Estatura</th>
+				                        <th>Peso</th>
 				                        <th>Editar</th>
 										<th>Estatus</th>
 				                      </tr>
@@ -111,10 +173,11 @@ $consulta=mysql_query("SELECT id_especialidad,nombre,activo FROM especialidades 
                               }
                           },
                          {
-							  text: 'Nueva Especialidad',
+							  text: 'Nuevo Paciente',
 							  className: 'btn btn-login',
                               action: function (  ) {
 								ver_alta();
+								combo_personas();
                               },
                               counter: 1
                           },

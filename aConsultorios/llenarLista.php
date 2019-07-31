@@ -33,21 +33,18 @@ $consulta=mysql_query("SELECT
 
 				                    <tbody align="center">
 				                    <?php 
-				                    $n=1;
-				                    while ($row=mysql_fetch_row($consulta)) {
-										$idUsuario          = $row[0];
-										$activo             = $row[3];
-										$nombre = $row[5].' '.$row[6].' '.$row[4];
-										$idArea          = $row[1];
-										$usuario            = $row[2];
-										$registro           = $row[7];
-										$contra             = $row[8];
+										$n=1;
+										while ($row=mysql_fetch_row($consulta)) {
+											$idConsultorio = $row[0];
+											$nombre        = $row[1];
+											$idArea        = $row[2];
+											$activo        = $row[3];
+											$Area          = $row[4];
 
-										$checado         = ($activo == 1)?'checked' : '';		
-										$desabilitar     = ($activo == 0)?'disabled': '';
-										$claseDesabilita = ($activo == 0)?'desabilita':'';
-										$deshabilitar_boton = ($id_usuario == $idUsuario)?"disabled = 'disabled'":"";
-															?>
+											$checado         = ($activo == 1)?'checked' : '';		
+											$desabilitar     = ($activo == 0)?'disabled': '';
+											$claseDesabilita = ($activo == 0)?'desabilita':'';
+									?>
 				                      <tr>
 				                        <td >
 				                          <p id="<?php echo "tConsecutivo".$n; ?>" class="<?php echo $claseDesabilita; ?>">
@@ -61,13 +58,13 @@ $consulta=mysql_query("SELECT
 				                        </td>
 				                        <td>
 																<p id="<?php echo "tArea".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $idArea; ?>
+				                          	<?php echo $Area; ?>
 				                          </p>
 				                        </td>
 				                        <td>
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
-				                          							'<?php echo $idUsuario  ?>',
+				                          							'<?php echo $idConsultorio  ?>',
 				                          							'<?php echo $idArea ?>',
 				                          							'<?php echo $nombre ?>'
 				                          							);">
@@ -75,12 +72,11 @@ $consulta=mysql_query("SELECT
 				                          </button>
 				                        </td>
 				                        <td>
-											<input <?php echo $deshabilitar_boton;?> data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idUsuario; ?>);">
+											<input <?php echo $deshabilitar_boton;?> data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idConsultorio; ?>);">
 				                        </td>
 				                      </tr>
 				                      <?php
 									  $n++;
-									  $deshabilitar_boton = "";
 				                    }
 				                     ?>
 
@@ -88,7 +84,7 @@ $consulta=mysql_query("SELECT
 
 				                    <tfoot align="center">
 				                      <tr class="info">
-															<th>#</th>
+										<th>#</th>
 				                        <th>Consultorio</th>
 				                        <th>Area</th>
 				                        <th>Editar</th>
@@ -132,11 +128,11 @@ $consulta=mysql_query("SELECT
                               }
                           },
                          {
-							  text: 'Nueva Area',
+							  text: 'Nuevo Consultorio',
 							  className: 'btn btn-login',
                               action: function (  ) {
 								ver_alta();
-								llenar_persona();
+								llenar_area();
                               },
                               counter: 1
                           },

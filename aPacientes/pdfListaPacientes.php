@@ -12,7 +12,7 @@
  */
 
 ob_start();
-include(dirname(__FILE__).'/res/listaUsuario.php');
+include(dirname(__FILE__).'/res/listaPacientes.php');
 $content = ob_get_clean();
 
 // convert to PDF
@@ -22,7 +22,7 @@ try
     $html2pdf = new HTML2PDF('P', 'A4', 'fr');
     $html2pdf->pdf->SetDisplayMode('fullpage');
     $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-    $html2pdf->Output('Lista_de_usuarios'.'.pdf');
+    $html2pdf->Output('Lista_de_pacientes'.'.pdf');
 }
 catch(HTML2PDF_exception $e) {
     echo $e;

@@ -8,10 +8,12 @@ include'../funcionesPHP/calcularEdad.php';
 // $idDatos=$_GET['datos'];
         
 mysql_query("SET NAMES utf8");
-$consulta=mysql_query("SELECT ( SELECT CONCAT( nombre, ' ', ap_paterno, ' ', ap_materno ) FROM personas WHERE personas.id_persona = usuarios.id_persona ),
-                        usuario 
-                        FROM usuarios 
-                        WHERE activo = '1'",$conexion) or die (mysql_error());
+$consulta=mysql_query("SELECT
+    (SELECT CONCAT(personas.nombre,' ',personas.ap_paterno,' ',personas.ap_materno) FROM personas WHERE personas.id_persona = doctores.id_persona) AS Doctor,
+    (SELECT nombre FROM especialidades WHERE especialidades.id_especialidad = doctores.id_especialidad) AS Especialidad,
+    (SELECT nombre FROM consultorios WHERE consultorios.id_consultorio = doctores.id_consultorio) AS Consultorio
+    FROM doctores 
+    WHERE activo = '1'",$conexion) or die (mysql_error());
    
 //Descargamos el arreglo que arroja la consulta
 $n=1;
@@ -118,26 +120,31 @@ $fechaEspanol=fechaCastellano($fecha);
     </tr>
     <tr >
         <td  colspan="10" class="encabezado">
-            LISTA DE USUARIOS
+            LISTA DE DOCTORES
         </td>
     </tr> 
     <tr >
         <td  colspan="1" class="titular">
             #
         </td>
-        <td  colspan="7" class="titular">
-            Nombre
+        <td  colspan="3" class="titular">
+            Nombre Doctor
         </td>
-        <td  colspan="2" class="titular">
-            Usuario
+        <td  colspan="3" class="titular">
+            Especialidad
+        </td>
+        <td  colspan="3" class="titular">
+            Consultorio
         </td>
     </tr>
 
     <?php
         $n=1;
         while($row=mysql_fetch_row($consulta)){
-            $nombre  = $row[0];
-            $usuario  = $row[1];
+            $nombre       = $row[0];
+            $especialidas = $row[1];
+            $consultorio  = $row[2];
+
     ?>
         <tr >
             <td  colspan="1" class="borde">
@@ -145,14 +152,19 @@ $fechaEspanol=fechaCastellano($fecha);
                     <?php echo $n; ?>
                 </p>
             </td>
-            <td  colspan="7" class="borde">
+            <td  colspan="3" class="borde">
                 <p class="parrafo">
                     <?php echo $nombre; ?>
                 </p>
             </td>
-            <td  colspan="2" class="borde">
+            <td  colspan="3" class="borde">
                 <p class="parrafo">
-                    <?php echo $usuario; ?>
+                    <?php echo $especialidas; ?>
+                </p>
+            </td>
+            <td  colspan="3" class="borde">
+                <p class="parrafo">
+                    <?php echo $consultorio; ?>
                 </p>
             </td>
         </tr>

@@ -16,6 +16,39 @@ function llenar_lista(){
     });	
 }
 
+function combo_personas(){
+    $.ajax({
+        url : 'combo_personas.php',
+        // data : {'id':id},
+        type : 'POST',
+        dataType : 'html',
+        success : function(respuesta) {
+            $("#nombre_persona").empty();
+            $("#nombre_persona").html(respuesta);      
+        },
+        error : function(xhr, status) {
+            alert('Disculpe, existió un problema');
+        },
+    });
+}
+function combo_personasE(id_persona){
+    $.ajax({
+        url : 'combo_personasE.php',
+        // data : {'id':id},
+        type : 'POST',
+        dataType : 'html',
+        success : function(respuesta) {
+            $("#nombre_personaE").empty();
+            $("#nombre_personaE").html(respuesta);
+            $("#nombre_personaE").val(id_persona);
+            $("#nombre_personaE").select2();         
+        },
+        error : function(xhr, status) {
+            alert('Disculpe, existió un problema');
+        },
+    });
+}
+
 function ver_alta(){
     // preCarga(800,4);
     $("#frmAlta")[0].reset();
@@ -36,14 +69,23 @@ $('#btnLista').on('click',function(){
 
 $("#frmAlta").submit(function(e){
   
-    var nombre_especialidad = $("#nombre_especialidad").val();
+    var nombre_persona = $("#nombre_persona").val();
+    var numero_seguro  = $("#numero_seguro").val();
+    var tipo_sangre    = $("#tipo_sangre").val();
+    var estatura       = $("#estatura").val();
+    var peso           = $("#peso").val();
+
 
         $.ajax({
             url:"guardar.php",
             type:"POST",
             dateType:"html",
             data:{
-                    'nombre_especialidad':nombre_especialidad
+                    'nombre_persona':nombre_persona,
+                    'numero_seguro':numero_seguro,
+                    'tipo_sangre':tipo_sangre,
+                    'estatura':estatura,
+                    'peso':peso
                  },
             success:function(respuesta){
                 if(respuesta == "ok"){
@@ -64,13 +106,17 @@ $("#frmAlta").submit(function(e){
         return false;
 });
 
-function abrirModalEditar(idArea,nombre_especialidad){
+function abrirModalEditar(idPaciente,idPersona,numero_seguro,tipo_sangre,estatura,peso){
    
     $("#frmActuliza")[0].reset();
 
-    $("#idE").val(idArea);
+    $("#idE").val(idPaciente);
+    $('#tipo_sangreE').val(tipo_sangre).trigger('change.select2');
+    $("#numero_seguroE").val(numero_seguro);
+    $("#estaturaE").val(estatura);
+    $("#pesoE").val(peso);
     
-    $("#nombre_especialidadE").val(nombre_especialidad);
+    combo_personasE(idPersona);
 
     $("#modalEditar").modal("show");
 
@@ -81,15 +127,21 @@ function abrirModalEditar(idArea,nombre_especialidad){
 
 $("#frmActuliza").submit(function(e){
   
-    var nombre_especialidadE = $("#nombre_especialidadE").val();
-    var ide                  = $("#idE").val();
+    var numero_seguro  = $("#numero_seguroE").val();
+    var tipo_sangre    = $("#tipo_sangreE").val();
+    var estatura       = $("#estaturaE").val();
+    var peso           = $("#pesoE").val();
+    var ide            = $("#idE").val();
 
         $.ajax({
             url:"actualizar.php",
             type:"POST",
             dateType:"html",
             data:{
-                    'nombre_especialidadE':nombre_especialidadE,
+                    'numero_seguro':numero_seguro,
+                    'tipo_sangre':tipo_sangre,
+                    'estatura':estatura,
+                    'peso':peso,
                     'ide':ide
                  },
             success:function(respuesta){
@@ -113,8 +165,11 @@ function status(concecutivo,id){
     var nomBoton  = "#boton"+concecutivo;
     var numero    = "#tConsecutivo"+concecutivo;
     var nCompleto = "#tNcompleto"+concecutivo;
-    var usuario   = "#tUsuario"+concecutivo;
-    var registro  = "#tRegistro"+concecutivo;
+    var seguro   = "#tseguro"+concecutivo;
+    var sangre  = "#tsangre"+concecutivo;
+    var estatura  = "#testatura"+concecutivo;
+    var peso  = "#tpeso"+concecutivo;
+    
     var nomBotonR  = "#botonR"+concecutivo;
 
     if( $(nomToggle).is(':checked') ) {
@@ -125,20 +180,20 @@ function status(concecutivo,id){
         $(nomBotonR).removeAttr("disabled");
         $(numero).removeClass("desabilita");
         $(nCompleto).removeClass("desabilita");
-        $(usuario).removeClass("desabilita");
-        $(registro).removeClass("desabilita");
-
+        $(seguro).removeClass("desabilita");
+        $(estatura).removeClass("desabilita");
+        $(peso).removeClass("desabilita");
     }else{
         // console.log("desactivado");
         var valor=1;
         alertify.error('Registro deshabilitado' );
         $(nomBoton).attr("disabled", "disabled");
         $(nomBotonR).attr("disabled", "disabled");
-        $(numero).addClass("desabilita");
         $(nCompleto).addClass("desabilita");
-        $(usuario).addClass("desabilita");
-        $(registro).addClass("desabilita");
-
+        $(seguro).addClass("desabilita");
+        $(sangre).addClass("desabilita");
+        $(estatura).addClass("desabilita");
+        $(peso).addClass("desabilita");
     }
     // console.log(concecutivo+' | '+id);
     $.ajax({
@@ -160,9 +215,9 @@ function status(concecutivo,id){
 
 function imprimir(){
 
-    var titular = "Lista de Areas";
-    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de especialidades activas";
-    var link    = "pdfListaEspecialidades.php?";
+    var titular = "Lista de Pacientes";
+    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de pacientes activos";
+    var link    = "pdfListaPacientes.php?";
 
     alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
     alertify.confirm(

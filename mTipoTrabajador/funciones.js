@@ -73,12 +73,10 @@ $("#frmAlta").submit(function(e){
         
 });
 
-function abrirModalEditar(nombre,direccion,telefono,ide){
+function abrirModalEditar(nombre,ide){
    
     $("#frmActuliza")[0].reset();
     $("#nombreE").val(nombre);
-    $("#direccionE").val(direccion);
-    $("#telefonoE").val(telefono);
     $("#idE").val(ide);
 
     $(".select2").select2();

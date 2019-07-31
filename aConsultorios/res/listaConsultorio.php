@@ -9,13 +9,10 @@ include'../funcionesPHP/calcularEdad.php';
         
 mysql_query("SET NAMES utf8");
 $consulta=mysql_query("SELECT
-                        CONCAT(nombre,' ',ap_paterno,' ',ap_materno) AS Nombre,
-                        IF(sexo='M','Masculino','Femenino') AS Genero,
-                        correo,
-                        IF(tipo_persona='trabajador','Trabajador','Estudiante') AS tipo,
-                        fecha_nacimiento
-                        FROM
-                        personas WHERE activo=1",$conexion) or die (mysql_error());
+nombre,
+(SELECT areas.nombre FROM areas WHERE areas.id_area=consultorios.id_area) AS nArea
+FROM
+consultorios",$conexion) or die (mysql_error());
    
 //Descargamos el arreglo que arroja la consulta
 $n=1;
@@ -122,24 +119,18 @@ $fechaEspanol=fechaCastellano($fecha);
     </tr>
     <tr >
         <td  colspan="10" class="encabezado">
-            LISTA DE PERSONAS
+            LISTA DE CONSULTORIOS
         </td>
     </tr> 
     <tr >
         <td  colspan="1" class="titular">
             #
         </td>
-        <td  colspan="3" class="titular">
+        <td  colspan="7" class="titular">
             Nombre
         </td>
-        <td  colspan="1" class="titular">
-            Edad
-        </td>
-        <td  colspan="3" class="titular">
-            Correo
-        </td>
         <td  colspan="2" class="titular">
-            Tipo
+            Area
         </td>
     </tr>
 
@@ -147,10 +138,7 @@ $fechaEspanol=fechaCastellano($fecha);
         $n=1;
         while($row=mysql_fetch_row($consulta)){
             $nombre  = $row[0];
-            $genero  = $row[1];
-            $correo = $row[2];
-            $tipo    = $row[3];
-            $edad    = CalculaEdad($row[4]); 
+            $area  = $row[1];
     ?>
         <tr >
             <td  colspan="1" class="borde">
@@ -158,24 +146,14 @@ $fechaEspanol=fechaCastellano($fecha);
                     <?php echo $n; ?>
                 </p>
             </td>
-            <td  colspan="3" class="borde">
+            <td  colspan="7" class="borde">
                 <p class="parrafo">
                     <?php echo $nombre; ?>
                 </p>
             </td>
-            <td  colspan="1" class="borde">
-                <p class="parrafo">
-                    <?php echo $edad; ?>
-                </p>
-            </td>
-            <td  colspan="3" class="borde">
-                <p class="parrafo">
-                    <?php echo $correo; ?>
-                </p>
-            </td>
             <td  colspan="2" class="borde">
                 <p class="parrafo">
-                    <?php echo $tipo; ?>
+                    <?php echo $area; ?>
                 </p>
             </td>
         </tr>

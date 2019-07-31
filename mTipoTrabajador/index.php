@@ -63,7 +63,7 @@
 				        <section id="alta" style="display: none">
             				<form id="frmAlta">
 								<div class="row">
-									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
+									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-12">
 										<div class="form-group">
 											<label for="nombre">Tipo de Trabajador:</label>
 											<input type="text" id="nombre" class="form-control " autofocus="" required="" placeholder="Escribe el nombre">

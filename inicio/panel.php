@@ -13,7 +13,7 @@
 
 				<div id="collapse1" class="panel-collapse collapse in">
 					<div class="panel-body">
-
+						<div class="row">
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
 								<i class="fas fa-user-friends"></i>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
-								<i class="fab fa-modx"></i>
+								<i class="fas fa-hospital"></i>
 								<p>
 									<a href="../aAreas/index.php">Areas</a>
 								</p>
@@ -52,7 +52,7 @@
 							<div class="caja">
 								<i class="fas fa-user-md"></i>
 								<p>
-									<a href="#">Doctores</a>
+									<a href="../aDoctores/index.php">Doctores</a>
 								</p>
 							</div>
 						</div> 
@@ -64,6 +64,33 @@
 								</p>
 							</div>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fas fa-stethoscope"></i>
+								<p>
+									<a href="../mTipoTrabajador/index.php">Tipo Trabajador</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fas fa-hospital-alt"></i>
+								<p>
+									<a href="../mSedes/index.php">Sedes</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fas fa-clinic-medical"></i>
+								<p>
+									<a href="../aConsultorios/index.php">Consultorios</a>
+								</p>
+							</div>
+						</div>
+					</div>
 					</div>
 				</div>				
 			</div>

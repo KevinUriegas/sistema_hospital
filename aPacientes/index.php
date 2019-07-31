@@ -105,7 +105,7 @@ $opcionMenu="A";
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Especialidades</button>
+										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Pacientes</button>
 										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar">										
 									</div>
 								</div>
@@ -137,24 +137,24 @@ $opcionMenu="A";
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Editar Datos Especialidades</h4>
+	        <h4 class="modal-title">Editar Datos Paciente</h4>
 	      </div>
 	      <div class="modal-body">
 				<input type="hidden" id="idE">
 				<div class="row">
-					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
 						<div class="form-group">
 							<label for="idPersona">Nombre de Persona:</label>
-							<select id="nombre_personaE" class="form-control"></select>
+							<select id="nombre_personaE" class="form-control" style="width: 100%" disabled></select>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-2">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
 						<div class="form-group">
 							<label for="idPersona">Numero de Seguro:</label>
-							<input type="text" id="numero_seguroE" class="form-control" placeholder="Numero de Seguro Social">
+							<input type="text" id="numero_seguroE" class="form-control" placeholder="Numero de Seguro Social" >
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-2">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 						<div class="form-group">
 							<label for="idPersona">Tipo de Sangre:</label>
 							<select id="tipo_sangreE" class="form-control select2">
@@ -169,13 +169,13 @@ $opcionMenu="A";
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-2">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 						<div class="form-group">
 							<label for="idPersona">Estatura:</label>
 							<input type="text" id="estaturaE" class="form-control" placeholder="Estatura (m)">
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-2">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 						<div class="form-group">
 							<label for="idPersona">Peso:</label>
 							<input type="text" id="pesoE" class="form-control" placeholder="Peso (kg)">

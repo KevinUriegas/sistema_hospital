@@ -1,7 +1,7 @@
 <?php 
 	include('../sesiones/verificar_sesion.php');
 	// Variables de configuración
-	$titulo="Catálago de Personas";
+	$titulo="Catálago de Sedes";
 	$opcionMenu="A";
 	$fecha=date("Y-m-d"); 
 ?>

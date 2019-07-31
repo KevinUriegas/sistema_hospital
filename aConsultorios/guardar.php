@@ -7,15 +7,14 @@ $id_usuario =  $_SESSION["idUsuario"];
 $idArea   = $_POST["idArea"];
 $nombre   = $_POST["nombre"];
 
-$idArea   = trim($idArea);
 $nombre   = trim($nombre);
-// $contra    = trim($contra);
-
-$fecha = date("Y-m-d"); 
-$hora  = date ("H:i:s");
 
 mysql_query("SET NAMES utf8");
-$insertar = mysql_query("INSERT INTO consultorios 
+$verificar = mysql_query("SELECT id_consultorio FROM consultorios WHERE id_area = '$idArea' AND nombre = '$nombre'",$conexion)or die(mysql_error());
+$existe = mysql_num_rows($verificar);
+
+if($existe == 0){
+    $insertar = mysql_query("INSERT INTO consultorios 
                         ( 
                         id_area, 
                         nombre,
@@ -25,5 +24,10 @@ $insertar = mysql_query("INSERT INTO consultorios
                         activo
                         ) 
                         VALUES('$idArea', '$nombre', '$id_usuario','$fecha', '$hora','1')",$conexion)or die(mysql_error());
+                        echo "ok";
+}else{
+    echo "duplicado";
+}
+
 
 ?>

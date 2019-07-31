@@ -1,17 +1,3 @@
-function verificar_pass(){
-  var pass1 = $('#contra').val();
-  var pass2 = $('#vContra').val();
-
-  if(pass1.trim() != "" && pass2.trim() !=""){
-    if(pass1 == pass2){
-      $('#guardar').removeAttr('disabled');
-    }else{
-      $('#guardar').attr('disabled', 'disabled');
-    }
-  }else{
-    $('#guardar').attr('disabled', 'disabled');
-  }
-}
 function llenar_lista(){
      // console.log("Se ha llenado lista");
     // preCarga(1000,4);
@@ -52,8 +38,6 @@ $("#frmAlta").submit(function(e){
   
     var idArea = $("#idArea").val();
     var nombre   = $("#nombre").val();
-    var contra    = $("#contra").val();
-    var vContra   = $("#vContra").val();
 
     // validacion para no meter id de persona en 0
     if(idArea==0){
@@ -77,11 +61,19 @@ $("#frmAlta").submit(function(e){
                     'nombre':nombre
                  },
             success:function(respuesta){
-              
-            alertify.set('notifier','position', 'bottom-right');
-            alertify.success('Se ha guardado el registro' );
-            llenar_lista();
-            ver_lista();
+                if(respuesta == "ok"){
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.success('Se ha guardado el registro' );
+                    llenar_lista();
+                    ver_lista();
+                }else if (respuesta == "duplicado"){
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error('Consultorio Duplicado' );
+                    $('#nombre').focus();
+                }else{
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error('Ha Ocurrido un Error' );
+                }
             },
             error:function(xhr,status){
                 alert(xhr);
@@ -91,13 +83,13 @@ $("#frmAlta").submit(function(e){
         return false;
 });
 
-function abrirModalEditar(idUsuario,idArea,nombre){
+function abrirModalEditar(idConsultorio,idArea,nombre){
    
     $("#frmActuliza")[0].reset();
 
-    llenar_personaU(idArea);
+    llenar_areaU(idArea);
 
-    $("#idE").val(idUsuario);
+    $("#idE").val(idConsultorio);
     
     $("#nombreE").val(nombre);
 
@@ -110,7 +102,8 @@ function abrirModalEditar(idUsuario,idArea,nombre){
 
 $("#frmActuliza").submit(function(e){
   
-    var nombre = $("#nombreE").val();
+    var nombre  = $("#nombreE").val();
+    var id_area = $("#areaE").val();
     var ide     = $("#idE").val();
 
         $.ajax({
@@ -119,6 +112,7 @@ $("#frmActuliza").submit(function(e){
             dateType:"html",
             data:{
                     'nombre':nombre,
+                    'id_area':id_area,
                     'ide':ide
                  },
             success:function(respuesta){
@@ -185,11 +179,11 @@ function status(concecutivo,id){
 }
 
 
-function llenar_persona()
+function llenar_area()
 {
     // alert(idRepre);
     $.ajax({
-        url : 'comboPersonas.php',
+        url : 'comboAreas.php',
         // data : {'id':id},
         type : 'POST',
         dataType : 'html',
@@ -204,11 +198,11 @@ function llenar_persona()
 }
 
 
-function llenar_personaU(idArea)
+function llenar_areaU(idArea)
 {
     // alert(idRepre);
     $.ajax({
-        url : 'comboPersonasU.php',
+        url : 'comboAreasU.php',
         // data : {'id':id},
         type : 'POST',
         dataType : 'html',
@@ -226,9 +220,9 @@ function llenar_personaU(idArea)
 
 function imprimir(){
 
-    var titular = "Lista de Usuarios";
-    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de usuarios activos";
-    var link    = "pdfListaUsuarios.php?";
+    var titular = "Lista de Consultorios";
+    var mensaje = "¿Deseas generar un archivo con PDF con la lista de consultorios activos";
+    var link    = "pdfListaConsultorios.php?";
 
     alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
     alertify.confirm(
