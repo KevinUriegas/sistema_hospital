@@ -1,3 +1,17 @@
+function verificar_pass(){
+  var pass1 = $('#contra').val();
+  var pass2 = $('#vContra').val();
+
+  if(pass1.trim() != "" && pass2.trim() !=""){
+    if(pass1 == pass2){
+      $('#guardar').removeAttr('disabled');
+    }else{
+      $('#guardar').attr('disabled', 'disabled');
+    }
+  }else{
+    $('#guardar').attr('disabled', 'disabled');
+  }
+}
 function llenar_lista(){
      // console.log("Se ha llenado lista");
     // preCarga(1000,4);
@@ -17,6 +31,7 @@ function llenar_lista(){
 }
 
 function ver_alta(){
+    // preCarga(800,4);
     $("#frmAlta")[0].reset();
     $("#lista").slideUp('low');
     $("#alta").slideDown('low');
@@ -35,33 +50,38 @@ $('#btnLista').on('click',function(){
 
 $("#frmAlta").submit(function(e){
   
-    var nombre    = $("#nombre").val();
+    var idArea = $("#idArea").val();
+    var nombre   = $("#nombre").val();
+    var contra    = $("#contra").val();
+    var vContra   = $("#vContra").val();
 
-    //Verifica si la cadena correo contiene un @ y .com
-    
+    // validacion para no meter id de persona en 0
+    if(idArea==0){
+        alertify.dialog('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+
+        alertify.alert()
+        .setting({
+            'title':'Información',
+            'label':'Salir',
+            'message': 'Debes seleccionar el dato de una Area.' ,
+            'onok': function(){ alertify.message('Gracias !');}
+        }).show();
+        return false;       
+    }
         $.ajax({
             url:"guardar.php",
             type:"POST",
             dateType:"html",
             data:{
-                'nombre':nombre
-            },
+                    'idArea':idArea,
+                    'nombre':nombre
+                 },
             success:function(respuesta){
-                if(respuesta == "ok"){
-                    alertify.set('notifier','position', 'bottom-right');
-                    alertify.success('Se ha guardado el registro' );
-                    $("#frmAlta")[0].reset();
-                    $("#nombre").focus();
-                    llenar_lista();
-                    ver_lista();
-                }else if (respuesta == "duplicado"){
-                    $("#nombre").focus();
-                    alertify.set('notifier','position', 'bottom-right');
-                    alertify.error('Registro Duplicado');
-                }else{
-                    alertify.set('notifier','position', 'bottom-right');
-                    alertify.error('Ha Ocurrido un Error');
-                }
+              
+            alertify.set('notifier','position', 'bottom-right');
+            alertify.success('Se ha guardado el registro' );
+            llenar_lista();
+            ver_lista();
             },
             error:function(xhr,status){
                 alert(xhr);
@@ -69,19 +89,17 @@ $("#frmAlta").submit(function(e){
         });
         e.preventDefault();
         return false;
-
-        
 });
 
-function abrirModalEditar(nombre,direccion,telefono,ide){
+function abrirModalEditar(idUsuario,idArea,nombre){
    
     $("#frmActuliza")[0].reset();
-    $("#nombreE").val(nombre);
-    $("#direccionE").val(direccion);
-    $("#telefonoE").val(telefono);
-    $("#idE").val(ide);
 
-    $(".select2").select2();
+    llenar_personaU(idArea);
+
+    $("#idE").val(idUsuario);
+    
+    $("#nombreE").val(nombre);
 
     $("#modalEditar").modal("show");
 
@@ -92,8 +110,8 @@ function abrirModalEditar(nombre,direccion,telefono,ide){
 
 $("#frmActuliza").submit(function(e){
   
-    var nombre    = $("#nombreE").val();
-    var ide       = $("#idE").val();
+    var nombre = $("#nombreE").val();
+    var ide     = $("#idE").val();
 
         $.ajax({
             url:"actualizar.php",
@@ -123,22 +141,30 @@ function status(concecutivo,id){
     var nomToggle = "#interruptor"+concecutivo;
     var nomBoton  = "#boton"+concecutivo;
     var numero    = "#tConsecutivo"+concecutivo;
-    var TipoTrabajador   = "#tTipoTrabajador"+concecutivo;
+    var nombre = "#tNombre"+concecutivo;
+    var area   = "#tArea"+concecutivo;
+    var nomBotonR  = "#botonR"+concecutivo;
 
     if( $(nomToggle).is(':checked') ) {
         // console.log("activado");
         var valor=0;
         alertify.success('Registro habilitado' );
         $(nomBoton).removeAttr("disabled");
+        $(nomBotonR).removeAttr("disabled");
         $(numero).removeClass("desabilita");
-        $(TipoTrabajador).removeClass("desabilita");
+        $(nombre).removeClass("desabilita");
+        $(area).removeClass("desabilita");
+
     }else{
-        console.log("desactivado");
+        // console.log("desactivado");
         var valor=1;
         alertify.error('Registro deshabilitado' );
         $(nomBoton).attr("disabled", "disabled");
+        $(nomBotonR).attr("disabled", "disabled");
         $(numero).addClass("desabilita");
-        $(TipoTrabajador).addClass("desabilita");
+        $(nombre).addClass("desabilita");
+        $(area).addClass("desabilita");
+
     }
     // console.log(concecutivo+' | '+id);
     $.ajax({
@@ -158,12 +184,51 @@ function status(concecutivo,id){
     });
 }
 
+
+function llenar_persona()
+{
+    // alert(idRepre);
+    $.ajax({
+        url : 'comboPersonas.php',
+        // data : {'id':id},
+        type : 'POST',
+        dataType : 'html',
+        success : function(respuesta) {
+            $("#idArea").empty();
+            $("#idArea").html(respuesta);      
+        },
+        error : function(xhr, status) {
+            alert('Disculpe, existió un problema');
+        },
+    });
+}
+
+
+function llenar_personaU(idArea)
+{
+    // alert(idRepre);
+    $.ajax({
+        url : 'comboPersonasU.php',
+        // data : {'id':id},
+        type : 'POST',
+        dataType : 'html',
+        success : function(respuesta) {
+            $("#areaE").empty();
+            $("#areaE").html(respuesta);
+            $("#areaE").val(idArea);
+            $("#areaE").select2();       
+        },
+        error : function(xhr, status) {
+            alert('Disculpe, existió un problema');
+        },
+    });
+}
+
 function imprimir(){
 
-    var titular = "Lista de Tipo Trabajador";
-    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de tipo de trabajadores activos";
-    // var link    = "pdfListaPersona.php?id="+idPersona+"&datos="+datos;
-    var link    = "pdfListaTipoT.php?";
+    var titular = "Lista de Usuarios";
+    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de usuarios activos";
+    var link    = "pdfListaUsuarios.php?";
 
     alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
     alertify.confirm(

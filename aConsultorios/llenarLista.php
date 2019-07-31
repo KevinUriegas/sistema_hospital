@@ -1,18 +1,21 @@
 <?php 
 // Conexion a la base de datos
-include'../conexion/conexion.php';
+include('../sesiones/verificar_sesion.php');
+
+$id_usuario =  $_SESSION["idUsuario"];
 
 // Codificacion de lenguaje
 mysql_query("SET NAMES utf8");
 
 // Consulta a la base de datos
 $consulta=mysql_query("SELECT
-							id_tipo_trabajador,
+							id_consultorio,
+							nombre,
+							id_area,
 							activo,
-							nombre AS tipo
-							
+							(SELECT areas.nombre FROM areas WHERE areas.id_area=consultorios.id_area) AS nArea
 						FROM
-							tipo_trabajadores ORDER BY id_tipo_trabajador DESC",$conexion) or die (mysql_error());
+							consultorios",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
  ?>
 				            <div class="table-responsive">
@@ -21,9 +24,10 @@ $consulta=mysql_query("SELECT
 				                    <thead align="center">
 				                      <tr class="info" >
 				                        <th>#</th>
-				                        <th>Nombre</th>
+				                        <th>Consultorio</th>
+				                        <th>Area</th>
 				                        <th>Editar</th>
-				                        <th>Estatus</th>
+										<th>Estatus</th>
 				                      </tr>
 				                    </thead>
 
@@ -31,12 +35,18 @@ $consulta=mysql_query("SELECT
 				                    <?php 
 				                    $n=1;
 				                    while ($row=mysql_fetch_row($consulta)) {
-										$idTipoTrabajador    = $row[0];
-										$activo     		 = $row[1];
-										$nomTipoTrabajador   = $row[2];
-										$checado=($activo==1)?'checked':'';		
-										$desabilitar=($activo==0)?'disabled':'';
-										$claseDesabilita=($activo==0)?'desabilita':'';
+										$idUsuario          = $row[0];
+										$activo             = $row[3];
+										$nombre = $row[5].' '.$row[6].' '.$row[4];
+										$idArea          = $row[1];
+										$usuario            = $row[2];
+										$registro           = $row[7];
+										$contra             = $row[8];
+
+										$checado         = ($activo == 1)?'checked' : '';		
+										$desabilitar     = ($activo == 0)?'disabled': '';
+										$claseDesabilita = ($activo == 0)?'desabilita':'';
+										$deshabilitar_boton = ($id_usuario == $idUsuario)?"disabled = 'disabled'":"";
 															?>
 				                      <tr>
 				                        <td >
@@ -45,25 +55,32 @@ $consulta=mysql_query("SELECT
 				                          </p>
 				                        </td>
 				                        <td>
-										<p id="<?php echo "tTipoTrabajador".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $nomTipoTrabajador; ?>
+																<p id="<?php echo "tnombre".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $nombre; ?>
 				                          </p>
 				                        </td>
 				                        <td>
-				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?>  type="button" class="btn btn-login btn-sm" 
+																<p id="<?php echo "tArea".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $idArea; ?>
+				                          </p>
+				                        </td>
+				                        <td>
+				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
-				                          							'<?php echo $nomTipoTrabajador ?>',
-																	'<?php echo $idTipoTrabajador ?>'
+				                          							'<?php echo $idUsuario  ?>',
+				                          							'<?php echo $idArea ?>',
+				                          							'<?php echo $nombre ?>'
 				                          							);">
 				                          	<i class="far fa-edit"></i>
 				                          </button>
 				                        </td>
 				                        <td>
-											<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idTipoTrabajador; ?>);">
+											<input <?php echo $deshabilitar_boton;?> data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idUsuario; ?>);">
 				                        </td>
 				                      </tr>
 				                      <?php
-				                      $n++;
+									  $n++;
+									  $deshabilitar_boton = "";
 				                    }
 				                     ?>
 
@@ -71,10 +88,11 @@ $consulta=mysql_query("SELECT
 
 				                    <tfoot align="center">
 				                      <tr class="info">
-				                        <th>#</th>
-				                        <th>Nombre</th>
+															<th>#</th>
+				                        <th>Consultorio</th>
+				                        <th>Area</th>
 				                        <th>Editar</th>
-				                        <th>Estatus</th>
+										<th>Estatus</th>
 				                      </tr>
 				                    </tfoot>
 				                </table>
@@ -104,26 +122,22 @@ $consulta=mysql_query("SELECT
                       // visible: false
                   }],
                   buttons: [
-                            // {
-                            //     extend: 'pageLength',
-                            //     text: 'Registros',
-                            //     className: 'btn btn-default'
-                            // },
                           {
                               extend: 'excel',
                               text: 'Exportar a Excel',
                               className: 'btn btn-login',
-                              title:'Lista de Tipos Trabajador',
+                              title:'Bajas-Estaditicas',
                               exportOptions: {
                                   columns: ':visible'
                               }
                           },
                          {
-                              text: 'Nuevo Tipo',
-                              action: function (  ) {
-                                      ver_alta();
-                              },
+							  text: 'Nueva Area',
 							  className: 'btn btn-login',
+                              action: function (  ) {
+								ver_alta();
+								llenar_persona();
+                              },
                               counter: 1
                           },
                   ]
