@@ -1,15 +1,16 @@
 <?php 
-	include('../sesiones/verificar_sesion.php');
-	// Variables de configuración
-	$titulo="Catálago de Tipo de Trabajador";
-	$opcionMenu="A";
-	$fecha=date("Y-m-d"); 
-?>
+include('../sesiones/verificar_sesion.php');
+
+// Variables de configuración
+$titulo="Catálago de Usuarios";
+$opcionMenu="A";
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Plantilla</title>
+	<title>Sistema Hospital</title>
 
 	<!-- Meta para compatibilidad en dispositivos mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,8 +21,6 @@
     <!-- fontawesome -->
 	<link rel="stylesheet" href="../plugins/fontawesome-free-5.8.1-web/css/all.min.css">
 
-	<!-- DataTableButtons -->
-     <!-- <link rel="stylesheet" href="../plugins/dataTableButtons/buttons.dataTables.min.css"> -->
 
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
@@ -49,7 +48,7 @@
 	</header><!-- /header -->	
 	<div class="container-fluid" >
 	<div class="row" id="cuerpo" style="display:none">
-		<div class="col-xs-0 col-sm-3 col-md-2 col-lg-2 vertical" >
+			<div class="col-xs-0 col-sm-3 col-md-2 col-lg-2 vertical">
 			<?php 
 				include('menuv.php');
 			 ?>
@@ -63,19 +62,26 @@
 				        <section id="alta" style="display: none">
             				<form id="frmAlta">
 								<div class="row">
-									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
+									<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
 										<div class="form-group">
-											<label for="nombre">Tipo de Trabajador:</label>
-											<input type="text" id="nombre" class="form-control " autofocus="" required="" placeholder="Escribe el nombre">
+											<label for="idArea">Seleccione el Area:</label>
+											<select  id="idArea" class="select2 form-control " style="width: 100%">
+											</select>
 										</div>
 									</div>
-									
+									<div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+										<div class="form-group">
+											<label for="Area">Nombre:</label>
+											<input type="text" id="Nombre" class="form-control " required="" placeholder="Escribe el usuario">
+										</div>
+									</div>
+
 									<hr class="linea">
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Tipos Trabajador</button>
-										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información">										
+										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Usuarios</button>
+										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar" disabled>										
 									</div>
 								</div>
             				</form>
@@ -99,22 +105,29 @@
 
 	<!-- Modal -->
 	<div id="modalEditar" class="modal fade" role="dialog">
-	  <div class="modal-dialog modal-lg">
+	  <div class="modal-dialog modal-md">
 
 	    <!-- Modal content-->
 	    <form id="frmActuliza">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Editar datos Tipo Trabajador</h4>
+	        <h4 class="modal-title">Editar Datos Consultorios</h4>
 	      </div>
 	      <div class="modal-body">
 				<input type="hidden" id="idE">
 				<div class="row">
-					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-12">
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
 						<div class="form-group">
-							<label for="nombreE">Tipo Trabajador:</label>
-							<input type="text" id="nombreE" class="form-control " autofocus="" required="" placeholder="Escribe el nombre">
+							<label for="areaE">Nombre del Area:</label>
+							<select  id="areaE" class="select2 form-control " style="width: 100%" disabled>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
+						<div class="form-group">
+							<label for="nombreE">Nombre:</label>
+							<input type="text" id="nombreE" class="form-control " required="" placeholder="Escribe el nombre de usuario">
 						</div>
 					</div>
 					<hr class="linea">
@@ -168,28 +181,25 @@
 	
 	<!-- alertify -->
 	<script type="text/javascript" src="../plugins/alertifyjs/alertify.js"></script>
-	<script src="../plugins/input-mask/jquery.inputmask.js"></script>
-	<script src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-	<script src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
     <!-- Funciones propias -->
     <script src="funciones.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/precarga.js"></script>
-	<script src="../js/salir.js"></script>
+		<script src="../js/salir.js"></script>
 
     <!-- LLAMADAS A FUNCIONES E INICIALIZACION DE COMPONENTES -->
 
     <!-- Llamar la funcion para llenar la lista -->
 	<script type="text/javascript">
-	  llenar_lista();
+		llenar_lista();
 	</script>
 
     <!-- Inicializador de elemento -->
      <script>
       $(function () {
         $(".select2").select2();
-        $('#telefono').inputmask('(999)-999-99-99');
+        
       });
     </script> 
 
