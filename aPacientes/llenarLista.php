@@ -46,6 +46,7 @@ FROM
 				                        <th>Tipo Sangre</th>
 				                        <th>Estatura</th>
 				                        <th>Peso</th>
+										<th>Alergias</th>
 				                        <th>Editar</th>
 										<th>Estatus</th>
 				                      </tr>
@@ -99,6 +100,15 @@ FROM
 											<p id="<?php echo "tpeso".$n; ?>" class="<?php echo $claseDesabilita; ?>">
 				                          	<?php echo $peso; ?>
 				                          </p>
+				                        </td>
+										<td>
+				                          <button id="<?php echo "botonA".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
+				                          onclick="abrirModalAlergias(
+				                          	'<?php echo $idPaciente  ?>',
+				                          	'<?php echo $idPersona ?>'
+				                          	);">
+				                          	<i class="fab fa-amilia"></i>
+				                          </button>
 				                        </td>	
 				                        <td>
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
@@ -132,6 +142,7 @@ FROM
 				                        <th>Tipo Sangre</th>
 				                        <th>Estatura</th>
 				                        <th>Peso</th>
+										<th>Alergias</th>
 				                        <th>Editar</th>
 										<th>Estatus</th>
 				                      </tr>
