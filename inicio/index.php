@@ -48,22 +48,6 @@
 
 					</section>
 				</div>
-				<!-- <div>
-					<label for="">Municipios</label>(<label id="n_m"></label>)
-					<select name="" id="municipios" class="form-control" onchange="verificar()">
-						<option value="" selected="true">Selecciona...</option>
-						<option value="1">Linares</option>
-					</select>
-
-					<label for="">Colonias</label>(<label id="n_c"></label>)
-					<select name="" id="colonias" class="form-control" onchange="verificar()">
-						<option value="" selected="true">Selecciona...</option>
-						<option value="1">Camachito</option>
-					</select>
-
-					<label for="">Total de Personas</label>(<label id="n_p"></label>)
-					<input name="" id="personas" class="form-control" value="100">
-				</div> -->
 			</div>			
 		</div>
 	</div>

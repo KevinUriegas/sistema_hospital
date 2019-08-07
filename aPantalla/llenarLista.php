@@ -9,17 +9,12 @@ mysql_query("SET NAMES utf8");
 
 $id_area = $_POST['id_area'];
 
-// Setcookie("id_area", $id_area);
-// $area = $_COOKIE["id_area"];
-// echo $area;
-
 $consulta = mysql_query("SELECT citas.id_cita, (SELECT CONCAT(personas.nombre,' ',personas.ap_paterno,' ',personas.ap_materno) FROM pacientes INNER JOIN personas ON personas.id_persona = pacientes.id_persona WHERE pacientes.id_paciente = citas.id_paciente) AS Paciente,
 	consultorios.nombre, (SELECT CONCAT(personas.nombre,' ',personas.ap_paterno,' ',personas.ap_materno) FROM doctores INNER JOIN personas ON personas.id_persona = doctores.id_persona WHERE doctores.id_consultorio = consultorios.id_consultorio) AS Doctor, citas.hora_cita
     FROM citas
 	INNER JOIN consultorios ON consultorios.id_consultorio = citas.id_consultorio
 	INNER JOIN areas ON areas.id_area = consultorios.id_area
-    WHERE areas.id_area = '$id_area'",$conexion);
-// $row=mysql_fetch_row($consulta)
+    WHERE areas.id_area = '$id_area' AND citas.fecha_cita = '$fecha' AND citas.activo = '2'",$conexion);
  ?>
 				            <div class="table-responsive">
 				                <table id="example1" class="table table-responsive table-condensed table-bordered table-striped">

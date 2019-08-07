@@ -117,26 +117,38 @@
 						</div> 
 						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
-								<i class="fas fa-calendar-alt"></i>
+								<i class="fas fa-desktop"></i>
 								<p>
-									<a href="#">Agenda</a>
+									<a href="../aPantalla/index.php">Pantallas</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fas fa-search-plus"></i>
+								<p>
+									<a href="../aCitasProgramadas/index.php">Citas Programadas</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fas fa-book-medical"></i>
+								<p>
+									<a href="../aCitas/index.php">Citas</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="caja">
+								<i class="fas fa-briefcase-medical"></i>
+								<p>
+									<a href="../aConsultar/index.php">Consultar</a>
 								</p>
 							</div>
 						</div> 
 					</div>
-				</div>
-				<div id="collapse3" class="panel-collapse collapse ">
-					<div class="panel-body">
-						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-							<div class="caja">
-								<i class="fab fa-modx"></i>
-								<p>
-									<a href="#">Citas</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>				
+				</div>			
 			</div>
 		</div>
 
