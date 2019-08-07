@@ -41,7 +41,7 @@ $consulta=mysql_query("SELECT
 															$desabilitar         = ($activo == 0)?'disabled'  : '';
 															$claseDesabilita     = ($activo == 0)?'desabilita': '';
 
-															$foto ='../images/'.$numSeguro.'.jpg';
+															$foto ='../images/'.$idPaciente.'.jpg';
 															if (file_exists($foto)){
 																$Icono="<i class='fas fa-check-circle fa-lg'></i>";
 																$imagen=$foto;
@@ -81,7 +81,7 @@ $consulta=mysql_query("SELECT
 
 				                        </td>
 				                        <td>
-													<button class="btn btn-login btn-sm" onclick="abrirModalSubir('<?php echo $numSeguro ?> ')">
+													<button class="btn btn-login btn-sm" onclick="abrirModalSubir('<?php echo $idPaciente ?> ')">
 														<i class="fas fa-upload"></i>
 													</button>
 				                        </td>
