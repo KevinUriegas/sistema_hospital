@@ -28,10 +28,10 @@ $(document).ready(function() {
         var formData = new FormData();
 
         var files = $('#image')[0].files[0];
-        var numSeguro=$('#nseg').val();
+        var idPaciente=$('#nseg').val();
 
         formData.append('file',files);
-        formData.append('nseg',numSeguro);
+        formData.append('nseg',idPaciente);
 
         $.ajax({
             url: 'upload.php',

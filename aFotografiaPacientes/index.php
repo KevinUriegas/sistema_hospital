@@ -94,7 +94,7 @@ $opcionMenu="A";
 				<div class="form-group">
 				<!-- <label for="image">Nueva imagen</label> -->
 				<input type="file" class="form-control-file" name="image" id="image">
-				<input type="hidden" class="form-control-file" name="mat" id="mat">
+				<input type="" class="form-control-file" name="nseg" id="nseg">
           </div>
 	      </div>
 	      <div class="modal-footer">
