@@ -16,9 +16,9 @@ function llenar_lista(){
     }); 
 }
 
-function abrirModalSubir(nseg){
+function abrirModalSubir(idp){
    
-    $('#nseg').val(nseg);
+    $('#idp').val(idp);
     $("#modalSubir").modal("show");
 }
 
@@ -27,11 +27,11 @@ $(document).ready(function() {
 
         var formData = new FormData();
 
-        var files = $('#image')[0].files[0];
-        var idPaciente=$('#nseg').val();
+        var files = $('#image_modal')[0].files[0];
+        var idp=$('#idp').val();
 
         formData.append('file',files);
-        formData.append('nseg',idPaciente);
+        formData.append('idp',idp);
 
         $.ajax({
             url: 'upload.php',

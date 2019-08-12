@@ -319,18 +319,4 @@
 		});
 		return false;
 	}
-	$("#image").fileinput({
-		theme: 'fas',
-		language: 'es',
-		showUpload: false,
-		showCaption: true,
-		showCancel: false,
-		showRemove: true,
-		browseClass: "btn btn-login",
-		fileType: "jpg",
-		allowedFileExtensions: ['jpg'],
-		overwriteInitial: false,
-		maxFileSize: 1000,
-		maxFilesNum: 10
-	});
 </script>

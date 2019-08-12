@@ -1,7 +1,7 @@
 <?php 
 include('../sesiones/verificar_sesion.php');
 // Variables de configuración
-$titulo="Cargar la fotografía de Pacientes";
+$titulo="Cargar la Fotografía de Pacientes";
 $opcionMenu="A";
  ?>
 <!DOCTYPE html>
@@ -88,13 +88,13 @@ $opcionMenu="A";
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Selecciona la fotografía del Paciente</h4>
+	        <h4 class="modal-title">Selecciona la Fotografía del Paciente</h4>
 	      </div>
 	      <div class="modal-body">
 				<div class="form-group">
 				<!-- <label for="image">Nueva imagen</label> -->
-				<input type="file" class="form-control-file" name="image" id="image">
-				<input type="" class="form-control-file" name="nseg" id="nseg">
+				<input type="file" class="form-control-file" name="image_modal" id="image_modal">
+				<input type="hidden" class="form-control-file" name="idp" id="idp">
           </div>
 	      </div>
 	      <div class="modal-footer">
@@ -146,11 +146,19 @@ $opcionMenu="A";
 	<!-- alertify -->
 	<script type="text/javascript" src="../plugins/alertifyjs/alertify.js"></script>
 
+	<script src="../plugins/bootstrap-fileinput-master/js/plugins/piexif.js" type="text/javascript"></script>
+    <script src="../plugins/bootstrap-fileinput-master/js/plugins/sortable.js" type="text/javascript"></script>
+    <script src="../plugins/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+    <script src="../plugins/bootstrap-fileinput-master/js/locales/fr.js" type="text/javascript"></script>
+    <script src="../plugins/bootstrap-fileinput-master/js/locales/es.js" type="text/javascript"></script>
+    <script src="../plugins/bootstrap-fileinput-master/themes/fas/theme.js" type="text/javascript"></script>
+    <script src="../plugins/bootstrap-fileinput-master/themes/explorer-fas/theme.js" type="text/javascript"></script>
+
     <!-- Funciones propias -->
     <script src="funciones.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/precarga.js"></script>
-		<script src="../js/salir.js"></script>
+	<script src="../js/salir.js"></script>
 
     <!-- LLAMADAS A FUNCIONES E INICIALIZACION DE COMPONENTES -->
 
@@ -180,14 +188,6 @@ $opcionMenu="A";
 			$("#titulo").fadeIn("slow");
 		};	
 	</script> 
-
-	<script src="../plugins/bootstrap-fileinput-master/js/plugins/piexif.js" type="text/javascript"></script>
-    <script src="../plugins/bootstrap-fileinput-master/js/plugins/sortable.js" type="text/javascript"></script>
-    <script src="../plugins/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
-    <script src="../plugins/bootstrap-fileinput-master/js/locales/fr.js" type="text/javascript"></script>
-    <script src="../plugins/bootstrap-fileinput-master/js/locales/es.js" type="text/javascript"></script>
-    <script src="../plugins/bootstrap-fileinput-master/themes/fas/theme.js" type="text/javascript"></script>
-    <script src="../plugins/bootstrap-fileinput-master/themes/explorer-fas/theme.js" type="text/javascript"></script>
 
 </body>
 </html>

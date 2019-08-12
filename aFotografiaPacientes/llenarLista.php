@@ -4,14 +4,7 @@ include'../conexion/conexion.php';
 // Codificacion de lenguaje
 mysql_query("SET NAMES utf8");
 // Consulta a la base de datos
-$consulta=mysql_query("SELECT 
-					   id_paciente,
-					   id_persona,
-					   numero_seguro,
-					   activo,
-					   (SELECT CONCAT(personas.nombre, ' ', personas.ap_paterno,' ', personas.ap_materno) FROM personas WHERE personas.id_persona=pacientes.id_persona) AS nPaciente,
-						 (SELECT personas.sexo FROM personas WHERE personas.id_persona=pacientes.id_persona) AS sexo
-					   FROM pacientes",$conexion) or die (mysql_error());
+$consulta=mysql_query("SELECT id_paciente, (SELECT CONCAT(nombre,' ',ap_paterno, ' ',ap_materno) FROM personas WHERE personas.id_persona = pacientes.id_persona),numero_seguro,activo FROM pacientes",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
  ?>
 				            <div class="table-responsive">
@@ -22,7 +15,6 @@ $consulta=mysql_query("SELECT
 				                        <th>#</th>
 				                        <th>No_Seguro</th>
 				                        <th>Nombre</th>
-				                        <th>Sexo</th>
 				                        <th>Verificación</th>
 				                        <th>Subir/Acualizar</th>
 				                      </tr>
@@ -32,28 +24,27 @@ $consulta=mysql_query("SELECT
 				                    <?php 
 				                    $n=1;
 				                    while ($row=mysql_fetch_row($consulta)) {
-															$idPaciente          = $row[0];
-															$numSeguro           = $row[2];
-															$activo              = $row[1];
-															$nomPacienteCompleto = $row[4];
-															$sexo                = $row[5];
-															$checado             = ($activo == 1)?'checked'   : '';		
-															$desabilitar         = ($activo == 0)?'disabled'  : '';
-															$claseDesabilita     = ($activo == 0)?'desabilita': '';
+										$idPaciente      = $row[0];
+										$No_Seguro       = $row[2];
+										$nomPaciente     = $row[1];
+										$activo          = $row[3];
+										$checado         = ($activo == 1)?'checked'   : '';		
+										$desabilitar     = ($activo == 0)?'disabled'  : '';
+										$claseDesabilita = ($activo == 0)?'desabilita': '';
 
-															$foto ='../images/'.$idPaciente.'.jpg';
-															if (file_exists($foto)){
-																$Icono="<i class='fas fa-check-circle fa-lg'></i>";
-																$imagen=$foto;
-														 }else{
-																$Icono="<i class='fas fa-times-circle fa-lg'></i>";
-																if ($sexo=='M') {
-																	$imagen='../images/hombre.png';
-																}else{
-																	$imagen='../images/mujer.jpg';
-																}
-														 }
-														?>
+										$foto ='../images_p/'.$idPaciente.'.jpg';
+										if (file_exists($foto)){
+											$Icono="<i class='fas fa-check-circle fa-lg'></i>";
+											$imagen=$foto;
+									 }else{
+											$Icono="<i class='fas fa-times-circle fa-lg'></i>";
+											// if ($sexo=='M') {
+												$imagen='../images_p/hombre.png';
+											// }else{
+											// 	$imagen='../images/mujer.jpg';
+											// }
+									 }
+									?>
 
 				                      <tr>
 				                        <td >
@@ -62,28 +53,23 @@ $consulta=mysql_query("SELECT
 				                          </p>
 				                        </td>
 				                        <td>
-										   <p id="<?php echo "tnumSeguro".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $numSeguro; ?>
+										   <p id="<?php echo "tNoControl".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $No_Seguro; ?>
 				                          </p>
 				                        </td>
 				                        <td>
-										   <p id="<?php echo "tnomPacienteCompleto".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $nomPacienteCompleto; ?>
-				                          </p>
-				                        </td>
-				                        <td>
-										   <p id="<?php echo "tsexo".$n; ?>"  class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $sexo; ?>
+										   <p id="<?php echo "tnomAlumnoCompleto".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $nomPaciente; ?>
 				                          </p>
 				                        </td>	
 				                        <td>
-										<a class="sb btn btn-login btn-sm" href="<?php echo $imagen ?>" title="<?php echo $nomPacienteCompleto ?>"><?php echo $Icono ?></a>
+											<a class="sb btn btn-login btn-sm" href="<?php echo $imagen ?>" title="<?php echo $nomAlumnoCompleto ?>"><?php echo $Icono ?></a>
 
 				                        </td>
 				                        <td>
-													<button class="btn btn-login btn-sm" onclick="abrirModalSubir('<?php echo $idPaciente ?> ')">
-														<i class="fas fa-upload"></i>
-													</button>
+											<button class="btn btn-login btn-sm" onclick="abrirModalSubir('<?php echo $idPaciente ?> ')">
+												<i class="fas fa-upload"></i>
+											</button>
 				                        </td>
 				                      </tr>
 				                      <?php
@@ -97,8 +83,7 @@ $consulta=mysql_query("SELECT
 				                      <tr class="info">
 										<th>#</th>
 				                        <th>No_Seguro</th>
-				                        <th>Nombre</th>
-				                        <th>Sexo</th>
+				                        <th>Carrera</th>
 				                        <th>Verificación</th>
 				                        <th>Subir/Acualizar</th>
 				                      </tr>
@@ -142,19 +127,19 @@ $consulta=mysql_query("SELECT
 
 <script>
 
-$("#image").fileinput({
-		theme: 'fas',
-		language: 'es',
-		showUpload: false,
-		showCaption: true,
-		showCancel: false,
-		showRemove: true,
-		browseClass: "btn btn-login",
-		fileType: "jpg",
-		allowedFileExtensions: ['jpg'],
-		overwriteInitial: false,
-		maxFileSize: 1000,
-		maxFilesNum: 10
+$("#image_modal").fileinput({
+	theme: 'fas',
+	language: 'es',
+	showUpload: false,
+	showCaption: true,
+	showCancel: false,
+	showRemove: true,
+	browseClass: "btn btn-login",
+	fileType: "jpg",
+	allowedFileExtensions: ['jpg'],
+	overwriteInitial: false,
+	maxFileSize: 1000,
+	maxFilesNum: 10
 });
 
 </script>

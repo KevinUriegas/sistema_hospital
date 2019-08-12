@@ -4,7 +4,7 @@ include('../sesiones/verificar_sesion.php');
 
 $id_usuario =  $_SESSION["idUsuario"];
 
-$idPaciente = $_POST['idPaciente'];
+$idPaciente = $_POST['id_paciente'];
 
 // Codificacion de lenguaje
 mysql_query("SET NAMES utf8");
@@ -18,15 +18,13 @@ $consulta=mysql_query("SELECT id_detalle_paciente,
 // $row=mysql_fetch_row($consulta)
  ?>
     <div class="table-responsive">
-        <table id="exampleA" class="table table-responsive table-condensed table-bordered table-striped">
+        <table id="exampleD" class="table table-responsive table-condensed table-bordered table-striped">
 
             <thead align="center">
                 <tr class="info" >
                 <th>#</th>
                 <th>Medicamento</th>
                 <th>Comentario</th>
-                <th>Editar</th>
-                <th>Estatus</th>
                 </tr>
             </thead>
 
@@ -61,17 +59,6 @@ $consulta=mysql_query("SELECT id_detalle_paciente,
                     <?php echo $comentario; ?>
                     </p>
                 </td>	
-                <td>
-                    <button id="<?php echo "botonA".$n; ?>" <?php echo $desabilitar ?> type="button" class="btn btn-login btn-sm" 
-                    onclick="editarAlergia(
-                    '<?php echo $idDetalle  ?>'
-                    );">
-                    <i class="far fa-edit"></i>
-                    </button>
-                </td>
-                <td>
-                   <button class="btn btn-login btn-sm" type="button" onclick="eliminar('<?php echo $idDetalle?>')"><i class="fa fa-trash"></i></button>
-                </td>
                 </tr>
                 <?php
                 $n++;
@@ -85,8 +72,6 @@ $consulta=mysql_query("SELECT id_detalle_paciente,
                 <th width="5%">#</th>
                 <th>Medicamento</th>
                 <th>Comentario</th>
-                <th width="5%">Editar</th>
-                <th width="5%">Estatus</th>
                 </tr>
             </tfoot>
         </table>
@@ -94,7 +79,7 @@ $consulta=mysql_query("SELECT id_detalle_paciente,
 			
     <script type="text/javascript">
     $(document).ready(function() {
-            $('#exampleA').DataTable( {
+            $('#exampleD').DataTable( {
                 "language": {
                         // "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                         "url": "../plugins/datatables/langauge/Spanish.json"

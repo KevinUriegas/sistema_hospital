@@ -15,6 +15,23 @@ function llenar_lista(){
         }
     });	
 }
+function llenar_listaD(id_paciente){
+     // console.log("Se ha llenado lista");
+    // preCarga(1000,4);
+    $.ajax({
+        url:"llenarLista2.php",
+        type:"POST",
+        dateType:"html",
+        data:{'id_paciente':id_paciente},
+        success:function(respuesta){
+            $("#lista2").html(respuesta);
+            $("#lista2").slideDown("fast");
+        },
+        error:function(xhr,status){
+            alert("no se muestra");
+        }
+    }); 
+}
 function llenar_listaA(id_receta){
      // console.log("Se ha llenado lista");
     // preCarga(1000,4);
@@ -134,8 +151,13 @@ function consultar(id_cita,id_paciente){
         dateType:"html",
         data:{'id_cita':id_cita,'id_paciente':id_paciente},
         success:function(respuesta){
-            $('#id_receta').val(respuesta);
-            llenar_listaA(respuesta);
+            var array = eval(respuesta);
+            $('#nombre_paciente').val(array[0]);
+            $('#id_receta').val(array[1]);
+            $('#no_seguro').val(array[2]);
+            $('#id_paciente').val(id_paciente);
+            llenar_listaA(array[1]);
+            $('#imagen_paciente').attr('src','../images_p/'+id_paciente+'.jpg');
         },
         error:function(xhr,status){
             alert(xhr);
@@ -151,6 +173,7 @@ function terminar_consulta(){
         data:{'id_cita':id_cita},
         success:function(respuesta){
             alertify.success("Consulta Terminada");
+            llenar_lista();
             ver_lista();
         },
         error:function(xhr,status){
@@ -279,7 +302,7 @@ function mensaje(){
         titular, 
         mensaje, 
         function(){ 
-            
+                reagendar();
             }, 
         function(){ 
                 terminar_consulta();
@@ -287,22 +310,78 @@ function mensaje(){
     ).set('labels',{ok:'Si',cancel:'No'}); 
 }
 
-function imprimir(){
+function mas_datos(){
+    var id_paciente = $('#id_paciente').val();
+     $.ajax({
+        url:"datos_paciente.php",
+        type:"POST",
+        dateType:"html",
+        data:{'id_paciente':id_paciente},
+        success:function(respuesta){
+            var array = eval(respuesta);
+            $('#tipo_sangre').val(array[0]);
+            $('#estatura').val(array[1]);
+            $('#peso').val(array[2]);
+            llenar_listaD(id_paciente);
+            $('#id_paciente_modal').val(id_paciente);
+        },
+        error:function(xhr,status){
+            alert(xhr);
+        },
+    });
+    $("#modalDatosPaciente").modal("show");
+}
+function reagendar(){
+    $('#modalReAgenda').modal("show");
+    var nombre = $('#nombre_paciente').val();
+    $('#paciente_modal').val(nombre);
 
-    var titular = "Lista de Pacientes";
-    var mensaje = "¿Deseas generar un archivo con PDF oon la lista de pacientes activos";
-    var link    = "pdfListaPacientes.php?";
+}
+$("#frmReAgenda").submit(function(e){
+    var id_paciente = $('#id_paciente').val();
+    var fecha       = $('#fecha_cita').val();
+    var hora        = $('#hora_cita').val();
 
-    alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
-    alertify.confirm(
-        titular, 
-        mensaje, 
-        function(){ 
-            window.open(link,'_blank');
-            }, 
-        function(){ 
-                alertify.error('Cancelar') ; 
-                // console.log('cancelado')
-              }
-    ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
+    $.ajax({
+        url:"reagenda.php",
+        type:"POST",
+        dateType:"html",
+        data:{
+            'fecha'      : fecha,
+            'hora'       : hora,
+            'id_paciente': id_paciente
+        },
+        success:function(respuesta){
+            if(respuesta == "ok"){
+                alertify.set('notifier','position', 'bottom-right');
+                alertify.success('Paciente Reagendado Correctamente' );
+                llenar_lista();
+                terminar_consulta();
+                $("#modalReAgenda").modal("hide");
+            }else if(respuesta = "duplicado"){
+                alertify.set('notifier','position', 'bottom-right');
+                alertify.error('Ya existe una cita agendada');
+            }
+        },
+        error:function(xhr,status){
+            alert(xhr);
+        },
+    });
+    e.preventDefault();
+    return false;
+});
+function llenar_lista3(fecha_cita){
+   $.ajax({
+       url:"llenarLista3.php",
+       type:"POST",
+       dateType:"html",
+       data:{'fecha_cita':fecha_cita},
+       success:function(respuesta){
+           $("#lista3").html(respuesta);
+           $("#lista3").slideDown("fast");
+       },
+       error:function(xhr,status){
+           alert("no se muestra");
+       }
+   });  
 }

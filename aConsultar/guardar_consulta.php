@@ -23,7 +23,8 @@
 		$mensaje = "ok";
 		$receta = $row2[0];
 	}
-	// $array = array($mensaje,$receta);
-	// echo json_encode($array);
-	echo $receta;
+	$cadena_paciente = mysql_query("SELECT (SELECT CONCAT(nombre, ' ', ap_paterno,' ', ap_materno) FROM personas WHERE personas.id_persona = pacientes.id_persona),numero_seguro FROM pacientes WHERE id_paciente = '$id_paciente'",$conexion);
+	$row_paciente = mysql_fetch_array($cadena_paciente);
+	$array = array($row_paciente[0],$receta,$row_paciente[1]);
+	echo json_encode($array);
 ?>

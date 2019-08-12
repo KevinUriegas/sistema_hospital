@@ -4,6 +4,8 @@ include('../sesiones/verificar_sesion.php');
 // Variables de configuración
 $titulo="Catálago de Pacientes";
 $opcionMenu="A";
+$fecha_mas = strtotime ( '+1 day' , strtotime ( $fecha ) ) ;
+$fecha_mas = date ( 'Y-m-d' , $fecha_mas );
 
  ?>
 <!DOCTYPE html>
@@ -60,6 +62,34 @@ $opcionMenu="A";
 			   <div class="contenido borde sombra">
 				    <div class="container-fluid">
 				        <section id="alta" style="display: none">
+				        	<div class="row">
+				        		<input type="hidden" id="id_paciente">
+				        		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+									<div class="form-group">
+										<a href="#" class="thumbnail">
+									      <img alt="" id="imagen_paciente">
+									    </a>
+									</div>
+								</div>
+				        		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+									<div class="form-group">
+										<label for="idMedicamento">*Nombre Paciente:</label>
+										<input type="text" readonly id="nombre_paciente" class="form-control">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+									<div class="form-group">
+										<label for="idMedicamento">*No. Seguro:</label>
+										<input type="text" readonly id="no_seguro" class="form-control">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+									<div class="form-group">
+										<br>
+										<button class="btn btn-login btn-flat  pull-right" onclick="mas_datos()">Ver mas Datos</button>
+									</div>
+								</div>
+				        	</div>
             				<form id="frmAlta">
 								<div class="row">
 									<input id="id_cita" class="form-control" type="hidden" value="0">
@@ -107,8 +137,103 @@ $opcionMenu="A";
 		<?php 
 			include('../layout/pie.php');
 		 ?>			
-
 	</footer>
+	<!-- Modal -->
+	<div id="modalDatosPaciente" class="modal fade" role="dialog">
+	  <div class="modal-dialog modal-md">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Datos del Paciente / Alergias</h4>
+	      </div>
+	      <div class="modal-body">
+				<input type="hidden" id="idE">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+						<div class="form-group">
+							<label for="areaE">*Tipo de Sangre:</label>
+							<input type="text" id="tipo_sangre" readonly class="form-control">
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+						<div class="form-group">
+							<label for="areaE">*Estatura:</label>
+							<input type="text" id="estatura" readonly class="form-control">
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+						<div class="form-group">
+							<label for="areaE">*Peso:</label>
+							<input type="text" id="peso" readonly class="form-control">
+						</div>
+					</div>
+					<hr class="linea">
+				</div>
+				<section id="lista2"></section>
+	      </div>
+	      <div class="modal-footer">
+				<div class="row">
+					<div class="col-lg-12">
+						<button type="button" id="btnCerrar" class="btn btn-login  btn-flat  pull-left" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Modal -->
+	<!-- Modal -->
+	<div id="modalReAgenda" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+	    	<!-- Modal content-->
+			<form id="frmReAgenda">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Re Agendar Paciente</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="id_paciente_modal">
+						<div class="row">
+						<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+								<div class="form-group">
+									<label for="idPersona">*Paciente:</label>
+									<input type="text" id="paciente_modal" class="form-control" readonly>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+								<div class="form-group">
+									<label for="idPersona">*Nueva Fecha:</label>
+									<input type="date" id="fecha_cita" class="form-control" required onchange='llenar_lista3(this.value)' min="<?php echo $fecha_mas?>">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+								<div class="form-group">
+									<label for="idPersona">*Nueva Hora:</label>
+									<input type="time" id="hora_cita" class="form-control" required>
+								</div>
+							</div>
+							<hr class="linea">
+						</div>
+						<section id="lista3">
+            
+				        </section>
+					</div>
+					<div class="modal-footer">
+						<div class="row">
+							<div class="col-lg-12">
+								<button type="button" id="btnCerrar" class="btn btn-login  btn-flat  pull-left" data-dismiss="modal">Cerrar</button>
+								<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Re-Agendar Paciente">	
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Modal -->
 
 	<!-- ENLACE A ARCHIVOS JS -->
 
@@ -131,16 +256,6 @@ $opcionMenu="A";
 	<!-- bootstrap-toggle-master -->
     <script src="../plugins/bootstrap-toggle-master/doc/script.js"></script>
     <script src="../plugins/bootstrap-toggle-master/js/bootstrap-toggle.js"></script>
-
- 	 <!-- dataTableButtons -->
-    <script type="text/javascript" src="../plugins/dataTableButtons/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.flash.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.colVis.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/jszip.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/pdfmake.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/vfs_fonts.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.print.min.js"></script>
 	
 	<!-- alertify -->
 	<script type="text/javascript" src="../plugins/alertifyjs/alertify.js"></script>

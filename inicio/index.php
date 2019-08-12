@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Sistema de Registros de Alumnos</title>
+	<title>Sistema Hospital</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="../plugins/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../plugins/fontawesome-free-5.8.1-web/css/all.min.css">
@@ -77,22 +77,6 @@
     <script src="../plugins/bootstrap-fileinput-master/js/locales/es.js" type="text/javascript"></script>
     <script src="../plugins/bootstrap-fileinput-master/themes/fas/theme.js" type="text/javascript"></script>
 	<script src="../plugins/bootstrap-fileinput-master/themes/explorer-fas/theme.js" type="text/javascript"></script>
-	<!-- <script>
-		function verificar(){
-			var municipios = $('#municipios').val();
-			var colonias   = $('#colonias').val();
-
-			if(municipios == "" && colonias == ""){
-				$('#personas').val("100");
-			}else if(municipios != "" && colonias == "" ){
-				$('#personas').val("50");
-			}else if(municipios != "" && colonias != "" ){
-				$('#personas').val("25");
-			}else if (colonias != "" && municipios == ""){
-				$('#personas').val("12");
-			}
-		}
-	</script> -->
 	<script>
 		window.onload = function() {
 			$("#cuerpo").fadeIn("slow");

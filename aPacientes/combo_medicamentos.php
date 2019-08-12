@@ -3,7 +3,7 @@ include "../conexion/conexion.php";
 
 mysql_query("SET NAMES utf8");
 
-$consulta = mysql_query("SELECT id_medicamento, nombre FROM catalogo_medicamento WHERE activo = '1'",$conexion)or die(mysql_error());
+$consulta = mysql_query("SELECT id_medicamento, nombre_medicamento FROM catalogo_medicamento WHERE activo = '1'",$conexion)or die(mysql_error());
 ?>
     <option value="0">Seleccione...</option>
 <?php
