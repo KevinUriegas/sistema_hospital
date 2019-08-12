@@ -62,8 +62,8 @@ $opcionMenu="A";
 				        <section id="alta" style="display: none">
             				<form id="frmAlta">
 								<div class="row">
-									<input id="id_cita" class="form-control" type="" value="0">
-									<input id="id_receta" class="form-control" type="" value="0">
+									<input id="id_cita" class="form-control" type="hidden" value="0">
+									<input id="id_receta" class="form-control" type="hidden" value="0">
 									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 										<div class="form-group">
 											<label for="idMedicamento">Selecciona el medicamento:</label>
@@ -89,7 +89,7 @@ $opcionMenu="A";
 									<div class="col-lg-12">
 										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Cancelar</button>
 										<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Guardar Información" id="guardar">		
-										<button type="button" class="btn btn-login  btn-flat  pull-right" onclick="terminar_consulta()">Terminar Consulta</button> 								
+										<button type="button" class="btn btn-login  btn-flat  pull-right" onclick="mensaje()">Terminar Consulta</button> 								
 									</div>
 								</div>
             				</form>

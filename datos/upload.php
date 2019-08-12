@@ -2,7 +2,7 @@
     include('../sesiones/verificar_sesion.php');
 
     $id_persona = $_SESSION["idPersona"];
-    $id_persona = $id_persona.'.jpg';
+    $id_persona = $id_persona.'.jpg';  
     if (is_array($_FILES) && count($_FILES) > 0) {
         if (($_FILES["file"]["type"] == "image/pjpeg")
             || ($_FILES["file"]["type"] == "image/jpeg")) {

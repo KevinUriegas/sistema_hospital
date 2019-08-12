@@ -4,6 +4,8 @@ include('../sesiones/verificar_sesion.php');
 
 $id_usuario =  $_SESSION["idUsuario"];
 
+$fecha_c = $_POST['fecha_cita'];
+
 // Codificacion de lenguaje
 mysql_query("SET NAMES utf8");
 
@@ -13,11 +15,11 @@ $consulta=mysql_query("SELECT id_cita,citas.id_paciente,
 FROM personas 
 WHERE personas.id_persona = pacientes.id_persona),id_consultorio,(SELECT nombre FROM consultorios WHERE consultorios.id_consultorio = citas.id_consultorio), fecha_cita,hora_cita,citas.activo
 FROM citas 
-INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.activo = '1' AND citas.fecha_cita  = '$fecha'",$conexion) or die (mysql_error());
+INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.activo = '1' AND citas.fecha_cita  = '$fecha_c'",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
  ?>
 				            <div class="table-responsive">
-				                <table id="example1" class="table table-responsive table-condensed table-bordered table-striped">
+				                <table id="example2" class="table table-responsive table-condensed table-bordered table-striped">
 
 				                    <thead align="center">
 				                      <tr class="info" >
@@ -26,7 +28,6 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.ac
 										<th>Consultorio</th>
 										<th>Fecha</th>
 										<th>Hora</th>
-										<th>Estatus</th>
 				                      </tr>
 				                    </thead>
 
@@ -50,7 +51,7 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.ac
 				                      <tr>
 				                        <td >
 				                          <p id="<?php echo "tConsecutivo".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo "$n"; ?>
+				                          	<?php echo "$idCita"; ?>
 				                          </p>
 				                        </td>
 				                        <td>
@@ -73,9 +74,6 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.ac
 												<?php echo $horaCita; ?>
 											</p>
 				                        </td>
-				                        <td>
-											<input data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Registrar Llegada" data-off="Activar" data-onstyle="primary" data-offstyle="success" class="interruptor" data-width="200" onchange="status(<?php echo $idCita; ?>);">
-				                        </td>
 				                      </tr>
 				                      <?php
 									  $n++;
@@ -91,7 +89,6 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.ac
 										<th>Consultorio</th>
 										<th>Fecha</th>
 										<th>Hora</th>
-										<th>Estatus</th>
 				                      </tr>
 				                    </tfoot>
 				                </table>
@@ -99,7 +96,7 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.ac
 			
       <script type="text/javascript">
         $(document).ready(function() {
-              $('#example1').DataTable( {
+              $('#example2').DataTable( {
                  "language": {
                          // "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                           "url": "../plugins/datatables/langauge/Spanish.json"
@@ -119,18 +116,7 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE citas.ac
                  columnDefs: [ {
                       // targets: 0,
                       // visible: false
-                  }],
-                  buttons: [
-                      {
-                          extend: 'excel',
-                          text: 'Exportar a Excel',
-                          className: 'btn btn-login',
-                          title:'Lista de Citas',
-                          exportOptions: {
-                              columns: ':visible'
-                          }
-                      },
-                  ]
+                  }]
               } );
           } );
 

@@ -5,7 +5,7 @@ $fecha_mas = strtotime ( '+1 day' , strtotime ( $fecha ) ) ;
 $fecha_mas = date ( 'Y-m-d' , $fecha_mas );
 
 // Variables de configuración
-$titulo="Citas Programadas";
+$titulo="Citas para Hoy";
 $opcionMenu="A";
 
  ?>
@@ -77,7 +77,56 @@ $opcionMenu="A";
 		 ?>			
 
 	</footer>
-
+		<!-- Modal -->
+	<div id="modalReAgenda" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+	    	<!-- Modal content-->
+			<form id="frmReAgenda">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Re Agendar Paciente</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="id_paciente_modal">
+						<div class="row">
+						<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+								<div class="form-group">
+									<label for="idPersona">*Paciente:</label>
+									<input type="text" id="paciente_modal" class="form-control" readonly>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+								<div class="form-group">
+									<label for="idPersona">*Nueva Fecha:</label>
+									<input type="date" id="fecha_cita" class="form-control" required onchange='llenar_lista2(this.value)' min="<?php echo $fecha_mas?>">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+								<div class="form-group">
+									<label for="idPersona">*Nueva Hora:</label>
+									<input type="time" id="hora_cita" class="form-control" required>
+								</div>
+							</div>
+							<hr class="linea">
+						</div>
+						<section id="lista2">
+            
+				        </section>
+					</div>
+					<div class="modal-footer">
+						<div class="row">
+							<div class="col-lg-12">
+								<button type="button" id="btnCerrar" class="btn btn-login  btn-flat  pull-left" data-dismiss="modal">Cerrar</button>
+								<input type="submit" class="btn btn-login  btn-flat  pull-right" value="Re-Agendar Paciente">	
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Modal -->
 	<!-- ENLACE A ARCHIVOS JS -->
 
 	<!-- jquery -->
@@ -99,16 +148,6 @@ $opcionMenu="A";
 	<!-- bootstrap-toggle-master -->
     <script src="../plugins/bootstrap-toggle-master/doc/script.js"></script>
     <script src="../plugins/bootstrap-toggle-master/js/bootstrap-toggle.js"></script>
-
- 	 <!-- dataTableButtons -->
-    <script type="text/javascript" src="../plugins/dataTableButtons/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.flash.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.colVis.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/jszip.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/pdfmake.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/vfs_fonts.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="../plugins/dataTableButtons/buttons.print.min.js"></script>
 	
 	<!-- alertify -->
 	<script type="text/javascript" src="../plugins/alertifyjs/alertify.js"></script>

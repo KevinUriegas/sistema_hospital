@@ -5,6 +5,7 @@ function llenar_tabla(id_area){
         dateType:"html",
         data:{'id_area':id_area},
         success:function(respuesta){
+            $('#area').val(id_area);
             $("#pantalla").html(respuesta);
             $("#pantalla").slideDown("fast");
         },

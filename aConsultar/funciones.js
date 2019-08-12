@@ -122,7 +122,7 @@ $("#frmAlta").submit(function(e){
     });
     e.preventDefault();
     return false;
-});
+}); 
 
 function consultar(id_cita,id_paciente){
     ver_alta();
@@ -269,6 +269,24 @@ function status(concecutivo,id){
     });
 }
 
+function mensaje(){
+
+    var titular = "Consulta de Pacientes";
+    var mensaje = "¿Deseas reagendar al paciente";
+
+    alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+    alertify.confirm(
+        titular, 
+        mensaje, 
+        function(){ 
+            
+            }, 
+        function(){ 
+                terminar_consulta();
+              }
+    ).set('labels',{ok:'Si',cancel:'No'}); 
+}
+
 function imprimir(){
 
     var titular = "Lista de Pacientes";
@@ -287,4 +305,4 @@ function imprimir(){
                 // console.log('cancelado')
               }
     ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
-  }
+}

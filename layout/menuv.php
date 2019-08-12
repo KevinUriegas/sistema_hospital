@@ -5,16 +5,16 @@
 							<a href="#" id="linkPanel"><i class="fas fa-home"></i> <label class="modulo">	Inicio</label></a>
 						</li>
 						<li class="list-unstyled icoMedia">
-							<a href="#" id="linkMisDatos"><i class="fas fa-user-circle"></i> <label class="modulo">	Mis Datos</label></a>
+							<a href="#" id="linkMisDatos" onclick="modal()"><i class="fas fa-user-circle"></i> <label class="modulo">	Mis Datos</label></a>
 						</li>
 						<li class="list-unstyled icoMedia">
-							<a href="#" id="linkMifoto">
+							<a href="#" id="linkMifoto" onclick='modal_foto()'>
 								<i class="fas fa-camera"></i>
 								<label class="modulo">Mi fotografía</label>
 							</a> 
 						</li >
 						<li class="list-unstyled icoMedia">
-							<a href="#" id="linkCambiarPass">
+							<a href="#" id="linkCambiarPass" onclick="cambiarPass()">
 								<i class="fas fa-unlock-alt"></i>
 								<label class="modulo">Cambiar Contraseña</label>
 							</a>

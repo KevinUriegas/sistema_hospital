@@ -13,7 +13,7 @@ $consulta=mysql_query("SELECT id_cita,citas.id_paciente,
 FROM personas 
 WHERE personas.id_persona = pacientes.id_persona),id_consultorio,(SELECT nombre FROM consultorios WHERE consultorios.id_consultorio = citas.id_consultorio), fecha_cita,hora_cita,citas.activo
 FROM citas 
-INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE (citas.activo = '1' OR citas.activo = '2')",$conexion) or die (mysql_error());
+INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE (citas.activo = '1' OR citas.activo = '2') AND citas.fecha_cita = '$fecha'",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
  ?>
 				            <div class="table-responsive">
@@ -43,8 +43,14 @@ INNER JOIN pacientes ON pacientes.id_paciente = citas.id_paciente WHERE (citas.a
 											$horaCita          = substr($row[6],0,5);											
 											$activo            = $row[7];
 
+											if($hora >= $horaCita){
+												$desabilitar = "";
+											}else{
+												$desabilitar = "disabled";
+											}
+
 											$checado         = ($activo == 1)?'checked' : '';		
-											$desabilitar     = ($activo == 0)?'disabled': '';
+											// $desabilitar     = ($activo == 0)?'disabled': '';
 											$claseDesabilita = ($activo == 0)?'desabilita':'';
 									?>
 				                      <tr>

@@ -6,12 +6,12 @@
 					</a>
 				</li>
 				<li class="list-unstyled modulo">
-					<a href="#" class="color borde" onclick="mllenardatos();">
+					<a href="#" class="color borde" onclick="modal()">
 						<i class="far fa-user-circle"></i>
 					</a>
 				</li>
 				<li class="list-unstyled modulo">
-					<a href="#" class="color borde">
+					<a href="#" class="color borde" onclick="cambiarPass()">
 						<i class="fas fa-unlock-alt"></i>
 					</a>
 				</li>

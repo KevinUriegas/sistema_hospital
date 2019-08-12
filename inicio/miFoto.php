@@ -3,7 +3,8 @@
 <?php
 	include('../sesiones/verificar_sesion.php');
 	$id_persona = $_SESSION["idPersona"];
- $ruta = '../images/'.$id_persona.'.jpg' ?>
+	 $ruta = '../images/'.$id_persona.'.jpg';
+?>
  <div class="row">
  	<div class="col-md-12">
  		<div class="col-md-offset-4 col-md-4">
@@ -29,7 +30,13 @@
 		</div>
 	</div>
 </form>
-
+<script src="../plugins/bootstrap-fileinput-master/js/plugins/piexif.js" type="text/javascript"></script>
+<script src="../plugins/bootstrap-fileinput-master/js/plugins/sortable.js" type="text/javascript"></script>
+<script src="../plugins/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+<script src="../plugins/bootstrap-fileinput-master/js/locales/fr.js" type="text/javascript"></script>
+<script src="../plugins/bootstrap-fileinput-master/js/locales/es.js" type="text/javascript"></script>
+<script src="../plugins/bootstrap-fileinput-master/themes/fas/theme.js" type="text/javascript"></script>
+<script src="../plugins/bootstrap-fileinput-master/themes/explorer-fas/theme.js" type="text/javascript"></script>
 <script>
 	$("#image").fileinput({
 		theme: 'fas',

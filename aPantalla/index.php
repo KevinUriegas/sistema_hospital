@@ -59,7 +59,7 @@ $opcionMenu="A";
 			<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 cont">
 			   <div class="titulo borde sombra">
 			        <h3><?php echo $titulo; ?></h3>
-					<input type="text" id="area">
+					<input type="hidden" id="area">
 			   </div>	
 			   <div class="contenido borde sombra">
 			   		<div id="pantalla"></div>
