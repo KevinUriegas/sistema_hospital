@@ -59,9 +59,9 @@ $("#frmIngreso").submit(function(e){
             type:"POST",
             dateType:"html",
             data:{
-                    'usuario':usuario,
-                    'contra':contra
-                 },
+                'usuario':usuario,
+                'contra':contra
+             },
             success:function(respuesta){
               console.log(respuesta);
               respuesta=parseInt(respuesta);

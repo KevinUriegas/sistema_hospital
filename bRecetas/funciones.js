@@ -181,12 +181,14 @@ function status(concecutivo,id){
     var nomToggle = "#interruptor"+concecutivo;
     var nomBoton  = "#boton"+concecutivo;
     var numero    = "#tConsecutivo"+concecutivo;
-    var idPaciente   = "#tidPaciente"+concecutivo;
-    var idDoctor    = "#tidDoctor"+concecutivo;
-    var descripcion  = "#tdescripcion"+concecutivo;
-    var idMedicamento      = "#tidMedicamento"+concecutivo;
-    var cantidad      = "#tcantidad"+concecutivo;
-    var codigo_receta      = "#tcodigo_receta"+concecutivo;
+    var tidPaciente   = "#tidPaciente"+concecutivo;
+    var tidDoctor    = "#tidDoctor"+concecutivo;
+    var tdescripcion  = "#tdescripcion"+concecutivo;
+    var tidMedicamento      = "#tidMedicamento"+concecutivo;
+    var tcantidad      = "#tcantidad"+concecutivo;
+    var tcodigo_receta      = "#tcodigo_receta"+concecutivo;
+     
+
 
     if( $(nomToggle).is(':checked') ) {
         // console.log("activado");
@@ -194,24 +196,24 @@ function status(concecutivo,id){
         alertify.success('Registro habilitado' );
         $(nomBoton).removeAttr("disabled");
         $(numero).removeClass("desabilita");
-        $(idPaciente).removeClass("desabilita");
-        $(idDoctor).removeClass("desabilita");
-        $(descripcion).removeClass("desabilita");
-        $(idMedicamento).removeClass("desabilita");
-        $(cantidad).removeClass("desabilita");
-        $(codigo_receta).removeClass("desabilita");
+        $(tidPaciente).removeClass("desabilita");
+        $(tidDoctor).removeClass("desabilita");
+        $(tdescripcion).removeClass("desabilita");
+        $(tidMedicamento).removeClass("desabilita");
+        $(tcantidad).removeClass("desabilita");
+        $(tcodigo_receta).removeClass("desabilita");
     }else{
         console.log("desactivado");
         var valor=1;
         alertify.error('Registro deshabilitado' );
-        $(nomBoton).attr("disabled", "disabled");
+        $(nomBoton).attr("disabled");
         $(numero).addClass("desabilita");
-        $(idPaciente).removeClass("desabilita");
-        $(idDoctor).removeClass("desabilita");
-        $(descripcion).removeClass("desabilita");
-        $(idMedicamento).removeClass("desabilita");
-        $(cantidad).removeClass("desabilita");
-        $(codigo_receta).removeClass("desabilita");
+        $(tidPaciente).addClass("desabilita");
+        $(tidDoctor).addClass("desabilita");
+        $(tdescripcion).addClass("desabilita");
+        $(tidMedicamento).addClass("desabilita");
+        $(tcantidad).addClass("desabilita");
+        $(tcodigo_receta).addClass("desabilita");
     }
     // console.log(concecutivo+' | '+id);
     $.ajax({
@@ -250,6 +252,26 @@ function imprimir(){
                 // console.log('cancelado')
               }
     ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
+  }
+
+  function generar_pdf(id_receta){
+        var titular = "Generar Receta";
+        var mensaje = "¿Deseas generar un archivo con PDF con la receta";
+        // var link    = "pdfListaPersona.php?id="+idPersona+"&datos="+datos;
+        var link    = "pdfReceta.php?id_receta="+id_receta;
+
+        alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+        alertify.confirm(
+            titular, 
+            mensaje, 
+            function(){ 
+                window.open(link,'_blank');
+                }, 
+            function(){ 
+                    alertify.error('Cancelar') ; 
+                    // console.log('cancelado')
+                }
+        ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
   }
   function llenar_medicamento()
 {

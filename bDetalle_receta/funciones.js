@@ -148,10 +148,11 @@ function status(concecutivo,id){
     var nomToggle = "#interruptor"+concecutivo;
     var nomBoton  = "#boton"+concecutivo;
     var numero    = "#tConsecutivo"+concecutivo;
-    var idReceta = "#tidReceta"+concecutivo;
+    var idMedicamento   = "#tidMedicamento"+concecutivo;
+    var cantidad   = "#tcantidad"+concecutivo;
     var codigo   = "#tcodigo"+concecutivo;
-    var idMedicamento    = "#tidMedicamento"+concecutivo;
-    var cantidad  = "#tcantidad"+concecutivo;
+    // var carrera  = "#tCarrera"+concecutivo;
+   // var sexo      = "#tSexo"+concecutivo;
 
     if( $(nomToggle).is(':checked') ) {
         // console.log("activado");
@@ -159,20 +160,23 @@ function status(concecutivo,id){
         alertify.success('Registro habilitado' );
         $(nomBoton).removeAttr("disabled");
         $(numero).removeClass("desabilita");
-        $(idReceta).removeClass("desabilita");
-        $(codigo).removeClass("desabilita");
         $(idMedicamento).removeClass("desabilita");
         $(cantidad).removeClass("desabilita");
+        $(codigo).removeClass("desabilita");
+        // $(carrera).removeClass("desabilita");
+        //$(sexo).removeClass("desabilita");
     }else{
-        console.log("desactivado");
+       // console.log("desactivado");
         var valor=1;
         alertify.error('Registro deshabilitado' );
         $(nomBoton).attr("disabled", "disabled");
         $(numero).addClass("desabilita");
-        $(idReceta).removeClass("desabilita");
-        $(codigo).removeClass("desabilita");
-        $(idMedicamento).removeClass("desabilita");
-        $(cantidad).removeClass("desabilita");
+        $(idMedicamento).addClass("desabilita");
+        $(cantidad).addClass("desabilita");
+        $(codigo).addClass("desabilita");
+        // $(noControl).addClass("desabilita");
+        // $(carrera).addClass("desabilita");
+       // $(sexo).addClass("desabilita");
     }
     // console.log(concecutivo+' | '+id);
     $.ajax({
@@ -180,9 +184,9 @@ function status(concecutivo,id){
         type:"POST",
         dateType:"html",
         data:{
-            'valor':valor,
-            'id':id
-        },
+                'valor':valor,
+                'id':id
+             },
         success:function(respuesta){
             // console.log(respuesta);
         },
@@ -191,7 +195,6 @@ function status(concecutivo,id){
         },
     });
 }
-
 function imprimir(){
 
     var titular = "Lista de personas";

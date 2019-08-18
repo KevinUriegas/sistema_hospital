@@ -118,7 +118,7 @@
 										<div class="form-group">
 											<label for="tipo">Tipo de persona:</label>
 											<select  id="tipo" class="select2 form-control " style="width: 100%">
-												<option value="estudiante">Paciente</option>
+												<option value="paciente">Paciente</option>
 												<option value="trabajador">Trabajador</option>
 											</select>
 										</div>

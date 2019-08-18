@@ -2,7 +2,7 @@
 include('../sesiones/verificar_sesion.php');
 
 // Variables de configuración
-$titulo="Catálago de Pacientes";
+$titulo="Consulta Pacientes";
 $opcionMenu="A";
 $fecha_mas = strtotime ( '+1 day' , strtotime ( $fecha ) ) ;
 $fecha_mas = date ( 'Y-m-d' , $fecha_mas );
@@ -267,7 +267,9 @@ $fecha_mas = date ( 'Y-m-d' , $fecha_mas );
     <script src="funciones.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/precarga.js"></script>
-		<script src="../js/salir.js"></script>
+	<script src="../js/salir.js"></script>
+	
+	<script src="../plugins/voice/responsivevoice.js"></script>
 
     <!-- LLAMADAS A FUNCIONES E INICIALIZACION DE COMPONENTES -->
 

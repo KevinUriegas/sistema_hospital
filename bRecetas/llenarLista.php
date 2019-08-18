@@ -39,6 +39,7 @@ $consulta=mysql_query("SELECT
 										<th>Codigo Receta</th>
 				                        <th>Editar</th>
 				                        <th>Estatus</th>
+										<th>PDF</th>
 				                      </tr>
 				                    </thead> 
 
@@ -114,8 +115,11 @@ $consulta=mysql_query("SELECT
 				                          </button>
 				                        </td>
 				                        <td>
-											<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idPersona; ?>);">
+											<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idReceta; ?>);">
 				                        </td>
+										<td>
+											<button type="button" onclick="generar_pdf('<?php echo $idReceta;?>')" class="btn btn-login fa-lg"><i class="fas fa-file-pdf"></i></button>
+										</td>
 				                      </tr>
 				                      <?php
 				                      $n++;
@@ -135,6 +139,7 @@ $consulta=mysql_query("SELECT
 										<th>Codigo Medicamento</th>
 				                        <th>Editar</th>
 				                        <th>Estatus</th>
+										<th>PDF</th>
 				                      </tr>
 				                    </tfoot>
 				                </table>
@@ -169,7 +174,7 @@ $consulta=mysql_query("SELECT
                             //     text: 'Registros',
                             //     className: 'btn btn-default'
                             // },
-                          {
+                          /*{
                               extend: 'excel',
                               text: 'Exportar a Excel',
                               className: 'btn btn-login',
@@ -177,7 +182,7 @@ $consulta=mysql_query("SELECT
                               exportOptions: {
                                   columns: ':visible'
                               }
-                          },
+                          }*/,
                          {
                               text: 'Nueva Receta',
                               action: function (  ) {

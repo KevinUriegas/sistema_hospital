@@ -88,7 +88,7 @@ $consulta=mysql_query("SELECT
 								</button>
 							</td>
 							<td>
-								<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idPersona; ?>);">
+								<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idDetalle; ?>);">
 							</td>
 						</tr>
 						<?php
@@ -142,7 +142,7 @@ $consulta=mysql_query("SELECT
                             //     text: 'Registros',
                             //     className: 'btn btn-default'
                             // },
-                            {
+                          /*  {
                             	extend: 'excel',
                             	text: 'Exportar a Excel',
                             	className: 'btn btn-login',
@@ -150,7 +150,7 @@ $consulta=mysql_query("SELECT
                             	exportOptions: {
                             		columns: ':visible'
                             	}
-                            },
+                            }*/,
                             {
                             	text: 'Nueva Receta',
                             	action: function (  ) {

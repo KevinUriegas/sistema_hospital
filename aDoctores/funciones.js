@@ -280,5 +280,9 @@ function imprimir(){
                 alertify.error('Cancelar') ; 
                 // console.log('cancelado')
               }
-    ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
+          function(){ 
+            alertify.error('3') ; 
+            // console.log('cancelado')
+          }
+    ).set('labels',{ok:'Generar PDF',cancel:'Cancelar',otro:'Otro'}); 
   }

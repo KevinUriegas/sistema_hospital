@@ -141,6 +141,11 @@ $("#frmAlta").submit(function(e){
     return false;
 }); 
 
+function hablar(texto){
+    var texto = texto + "favor de pasar";
+    responsiveVoice.speak(texto,"Spanish Female"); 
+}
+
 function consultar(id_cita,id_paciente){
     ver_alta();
     combo_medicamentos();
@@ -158,6 +163,7 @@ function consultar(id_cita,id_paciente){
             $('#id_paciente').val(id_paciente);
             llenar_listaA(array[1]);
             $('#imagen_paciente').attr('src','../images_p/'+id_paciente+'.jpg');
+            hablar(array[0]);
         },
         error:function(xhr,status){
             alert(xhr);

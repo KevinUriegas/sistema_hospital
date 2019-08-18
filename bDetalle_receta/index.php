@@ -1,6 +1,6 @@
 <?php 
-include'../conexion/conexion.php';
-
+// include'../conexion/conexion.php';
+include ('../sesiones/verificar_sesion.php');
 // Variables de configuración
 $titulo="Catálago de Recetas";
 $opcionMenu="A";
@@ -10,7 +10,8 @@ $fecha=date("Y-m-d");
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Plantilla</title>
+	<title>Detalle Recetas</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../img/logo.png">
 
 	<!-- Meta para compatibilidad en dispositivos mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,8 +46,8 @@ $fecha=date("Y-m-d");
 <body>
 	<header>
 		<?php 
-		include('../layout/encabezado.php');
-		?>
+			include('../layout/encabezado.php');
+		 ?>
 	</header><!-- /header -->	
 	<div class="container-fluid" >
 		<div class="row" id="cuerpo" style="display:none">
@@ -230,5 +231,56 @@ $fecha=date("Y-m-d");
 			$("#cuerpo").fadeIn("slow");
 		};	
 	</script>
+	<script>
+		function cambiar_contra(){
+            $("#modalContra").modal("show");
+            $("#frmContra")[0].reset();
+            $('#modalContra').on('shown.bs.modal', function () {
+                $('#pass').focus();            
+            }); 
+        }
+                        function actualizar_pass(){
+            var pass   = $("#pass").val();
+            $.ajax({
+                url:"../sesiones/actualizar_pass2.php",
+                type:"POST",
+                dateType:"html",
+                data:{
+                    'pass':pass
+                },
+                success:function(respuesta){
+                    alertify.warning(respuesta);
+                if (respuesta == "ok"){
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.success('Se ha actualizado la contraseña' );
+                    $("#frmContra")[0].reset();
+                    $("#modalContra").modal("hide");
+                }else{
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error('La contraseña es igual a la Anterior' );
+                }
+                },
+                error:function(xhr,status){
+                    alert(xhr);
+                },
+            });
+        }
+
+        function verificar_pass(){
+            var pass1 = $('#pass').val();
+            var pass2 = $('#pass1').val();
+
+            if(pass1.trim() != "" && pass2.trim() !=""){
+                if(pass1 == pass2){
+                    $('#btn_actualizar_pass').removeAttr('disabled');
+                }else{
+                    $('#btn_actualizar_pass').attr('disabled', 'disabled');
+                }
+            }else{
+                $('#btn_actualizar_pass').attr('disabled', 'disabled');
+            }
+        }
+	</script>
+	<script type="text/javascript" src="../plugins/Smoothbox-master/js/smoothbox.min.js"></script>
 </body>
 </html>

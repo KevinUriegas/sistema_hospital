@@ -11,7 +11,8 @@ $fecha=date("Y-m-d");
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Plantilla</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../img/logo.png">
+	<title>Recetas</title>
 
 	<!-- Meta para compatibilidad en dispositivos mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
